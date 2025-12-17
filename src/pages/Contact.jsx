@@ -52,8 +52,8 @@ export default function Contact() {
     {
       icon: Phone,
       title: "Phone",
-      content: "+353 87-763-8300",
-      link: "tel:+353877638300"
+      content: "+353 089-440-5401",
+      link: "tel:+3530894405401"
     },
     {
       icon: Mail,
@@ -64,7 +64,7 @@ export default function Contact() {
     {
       icon: MapPin,
       title: "Address",
-      content: "7 The Business Centre, Stadium Business Park, Blanchardstown, Dublin 15",
+      content: "Kilcock, Kildare",
       link: "https://maps.google.com"
     },
     {
@@ -278,7 +278,7 @@ export default function Contact() {
                     <YouTubeIcon />
                   </a>
                   <a 
-                    href="https://wa.me/353877638300" 
+                    href="https://wa.me/3530894405401" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center hover:bg-rose-100 hover:text-rose-500 transition-all"

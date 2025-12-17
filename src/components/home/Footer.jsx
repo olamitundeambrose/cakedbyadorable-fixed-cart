@@ -69,7 +69,7 @@ export default function Footer() {
                 <YouTubeIcon />
               </a>
               <a 
-                href="https://wa.me/353877638300" 
+                href="https://wa.me/3530894405401" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
@@ -102,11 +102,11 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a 
-                  href="tel:+353877638300" 
+                  href="tel:+3530894405401" 
                   className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors"
                 >
                   <Phone className="w-5 h-5" />
-                  +353 87-763-8300
+                  +353 089-440-5401
                 </a>
               </li>
               <li>
@@ -121,9 +121,7 @@ export default function Footer() {
               <li className="flex items-start gap-3 text-stone-400">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <span>
-                  7 The Business Centre,<br />
-                  Stadium Business Park,<br />
-                  Blanchardstown, Dublin 15
+                  Kilcock, Kildare
                 </span>
               </li>
             </ul>

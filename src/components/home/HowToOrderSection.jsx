@@ -1,31 +1,71 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Search, MessageCircle, ChefHat, Truck } from 'lucide-react';
+
+// Custom cake-themed SVG icons
+const CakeIcon = () => (
+  <svg viewBox="0 0 64 64" className="w-10 h-10 text-rose-400" fill="currentColor">
+    <path d="M8 32h48v24c0 2.2-1.8 4-4 4H12c-2.2 0-4-1.8-4-4V32z"/>
+    <path d="M12 28h40v8H12z" opacity="0.7"/>
+    <circle cx="20" cy="20" r="2"/>
+    <circle cx="32" cy="18" r="2"/>
+    <circle cx="44" cy="20" r="2"/>
+    <path d="M20 22v6M32 20v8M44 22v6" stroke="currentColor" strokeWidth="2" fill="none"/>
+  </svg>
+);
+
+const WhiskIcon = () => (
+  <svg viewBox="0 0 64 64" className="w-10 h-10 text-rose-400" fill="currentColor">
+    <path d="M32 8L28 52h8L32 8z"/>
+    <path d="M24 12l16 8-16 8 16 8-16 8" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <circle cx="32" cy="8" r="3"/>
+  </svg>
+);
+
+const OvenIcon = () => (
+  <svg viewBox="0 0 64 64" className="w-10 h-10 text-rose-400" fill="currentColor">
+    <rect x="8" y="16" width="48" height="40" rx="4"/>
+    <rect x="12" y="20" width="40" height="32" rx="2" fill="rgba(0,0,0,0.3)"/>
+    <circle cx="48" cy="12" r="2"/>
+    <circle cx="52" cy="12" r="2"/>
+    <path d="M16 28h32M16 36h32M16 44h32" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
+  </svg>
+);
+
+const DeliveryIcon = () => (
+  <svg viewBox="0 0 64 64" className="w-10 h-10 text-rose-400" fill="currentColor">
+    <path d="M8 20h32v24H8z"/>
+    <path d="M40 28h12l4 8v8H40V28z"/>
+    <circle cx="16" cy="52" r="4"/>
+    <circle cx="48" cy="52" r="4"/>
+    <path d="M24 12h8v8h-8z" opacity="0.7"/>
+    <path d="M28 8v4M24 10h8" stroke="currentColor" strokeWidth="2" fill="none"/>
+  </svg>
+);
 
 const steps = [
   {
-    icon: Search,
+    icon: CakeIcon,
     number: "01",
-    title: "Find a Cake You Love",
-    description: "Browse our portfolio and discover designs that inspire you. Every cake can be customized to your vision."
+    title: "Browse & Dream",
+    description: "Explore our sweet gallery and discover designs that inspire you. Every cake can be customized to your vision."
   },
   {
-    icon: MessageCircle,
+    icon: WhiskIcon,
     number: "02",
-    title: "Contact Us",
-    description: "Discuss your event details, colors, flowers, and size. We'll guide you through every option."
+    title: "Mix & Plan",
+    description: "Share your event details, flavors, colors, and size. We'll whisk together the perfect plan for you."
   },
   {
-    icon: ChefHat,
+    icon: OvenIcon,
     number: "03",
-    title: "We Create It",
-    description: "Freshly baked using the finest ingredients. Each cake is a labor of love, crafted just for you."
+    title: "Bake & Craft",
+    description: "Freshly baked using the finest ingredients. Each cake is lovingly crafted in our kitchen just for you."
   },
   {
-    icon: Truck,
+    icon: DeliveryIcon,
     number: "04",
-    title: "We Deliver It",
-    description: "Careful, reliable delivery to your location. Your cake arrives in perfect condition, ready to wow."
+    title: "Slice & Celebrate",
+    description: "Careful delivery to your celebration. Your masterpiece arrives ready to create sweet memories."
   }
 ];
 
@@ -72,7 +112,7 @@ export default function HowToOrderSection() {
               {/* Icon circle */}
               <div className="relative inline-block mb-6">
                 <div className="w-32 h-32 rounded-full bg-stone-800 flex items-center justify-center mx-auto border border-stone-700 group-hover:border-rose-400/50 transition-colors duration-300">
-                  <step.icon className="w-10 h-10 text-rose-400" />
+                  <step.icon />
                 </div>
                 {/* Step number */}
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-rose-400 text-stone-900 text-xs font-bold px-3 py-1 rounded-full">
