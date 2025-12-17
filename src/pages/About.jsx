@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -6,11 +6,59 @@ import { createPageUrl } from '@/utils';
 import { Award, Heart, Clock, Users, ArrowRight } from 'lucide-react';
 
 const stats = [
-  { icon: Award, value: "15+", label: "Years Experience" },
-  { icon: Heart, value: "2,500+", label: "Happy Customers" },
-  { icon: Clock, value: "100%", label: "Fresh Ingredients" },
-  { icon: Users, value: "50+", label: "Wedding Partners" },
+  { icon: Award, value: 15, suffix: "+", label: "Years Experience" },
+  { icon: Heart, value: 2500, suffix: "+", label: "Happy Customers" },
+  { icon: Clock, value: 100, suffix: "%", label: "Fresh Ingredients" },
+  { icon: Users, value: 50, suffix: "+", label: "Wedding Partners" },
 ];
+
+const AnimatedCounter = ({ value, suffix, duration = 2 }) => {
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          const startTime = Date.now();
+          const endValue = value;
+
+          const animate = () => {
+            const now = Date.now();
+            const progress = Math.min((now - startTime) / (duration * 1000), 1);
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const currentCount = Math.floor(easeOutQuart * endValue);
+
+            setCount(currentCount);
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              setCount(endValue);
+            }
+          };
+
+          animate();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [value, duration, hasAnimated]);
+
+  return (
+    <span ref={ref}>
+      {count.toLocaleString()}{suffix}
+    </span>
+  );
+};
 
 export default function About() {
   return (
@@ -130,7 +178,9 @@ export default function About() {
                 <div className="w-16 h-16 rounded-2xl bg-rose-400/10 flex items-center justify-center mx-auto mb-4">
                   <stat.icon className="w-8 h-8 text-rose-400" />
                 </div>
-                <div className="text-4xl font-serif font-medium text-white mb-2">{stat.value}</div>
+                <div className="text-4xl font-serif font-medium text-white mb-2">
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                </div>
                 <div className="text-stone-400">{stat.label}</div>
               </motion.div>
             ))}
