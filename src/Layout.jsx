@@ -8,6 +8,7 @@ import { Menu, X, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Footer from '@/components/home/Footer';
+import LoadingScreen from '@/components/LoadingScreen';
 
 const navLinks = [
   { name: 'Home', page: 'Home' },
@@ -21,6 +22,7 @@ const navLinks = [
 export default function Layout({ children, currentPageName }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
   const { data: cartItems = [] } = useQuery({
@@ -43,11 +45,22 @@ export default function Layout({ children, currentPageName }) {
     setMobileOpen(false);
   }, [location]);
 
+  // Handle initial loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // Show loading for 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const isHome = currentPageName === 'Home';
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <style>{`
+    <>
+      <LoadingScreen isLoading={isLoading} />
+      <div className="min-h-screen flex flex-col">
+        <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
         
         :root {
@@ -186,6 +199,7 @@ export default function Layout({ children, currentPageName }) {
 
       {/* Footer */}
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }
