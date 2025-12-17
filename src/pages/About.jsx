@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Award, Heart, Clock, Users, ArrowRight } from 'lucide-react';
+import AdorableImage from '@/assets/Adorable.jpeg';
 
 const stats = [
   { icon: Award, value: 15, suffix: "+", label: "Years Experience" },
@@ -112,8 +113,8 @@ export default function About() {
             >
               <div className="aspect-[4/5] rounded-3xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1556217477-d325251ece38?w=800&q=80"
-                  alt="Baker at work"
+                  src={AdorableImage}
+                  alt="Adorable - Master Baker"
                   className="w-full h-full object-cover"
                 />
               </div>
