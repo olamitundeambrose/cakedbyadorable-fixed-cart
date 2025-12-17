@@ -83,17 +83,17 @@ export default function About() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="text-rose-400 font-medium tracking-wider uppercase text-sm">Meet Michael</span>
+              <span className="text-rose-400 font-medium tracking-wider uppercase text-sm">Meet the Team</span>
               <h2 className="text-3xl sm:text-4xl font-serif font-medium text-stone-800 mt-3 mb-6">
-                The Master Baker Behind Creative Cakes
+                The Master Bakers Behind Caked by Adorable
               </h2>
               <div className="space-y-4 text-stone-600 leading-relaxed">
                 <p>
-                  With over 15 years of experience in the art of cake making, Michael founded Creative Cakes 
+                  With over 15 years of experience in the art of cake making, we founded Caked by Adorable 
                   with a simple mission: to create unforgettable moments through extraordinary cakes.
                 </p>
                 <p>
-                  Trained in classical patisserie and constantly innovating, Michael combines traditional 
+                  Trained in classical patisserie and constantly innovating, we combine traditional 
                   techniques with modern design to create cakes that are as beautiful as they are delicious.
                 </p>
                 <p>

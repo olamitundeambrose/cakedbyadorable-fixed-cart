@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <h3 className="text-2xl font-serif text-white mb-4">Creative Cakes</h3>
+            <h3 className="text-2xl font-serif text-white mb-4">Caked by Adorable</h3>
             <p className="text-stone-400 mb-6 max-w-md leading-relaxed">
               Crafting exquisite bespoke cakes for weddings, birthdays, and every special occasion. 
               Each creation is a masterpiece made with love and the finest ingredients.
@@ -111,11 +111,11 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="mailto:michael@creativecakes.ie" 
+                  href="mailto:info@cakedbyadorable.ie" 
                   className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors"
                 >
                   <Mail className="w-5 h-5" />
-                  michael@creativecakes.ie
+                  info@cakedbyadorable.ie
                 </a>
               </li>
               <li className="flex items-start gap-3 text-stone-400">
@@ -133,7 +133,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="py-6 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-stone-500 text-sm">
-            © {new Date().getFullYear()} Creative Cakes. All rights reserved.
+            © {new Date().getFullYear()} Caked by Adorable. All rights reserved.
           </p>
           <p className="text-stone-500 text-sm flex items-center gap-1">
             Made with <Heart className="w-4 h-4 text-rose-400 fill-rose-400" /> in Dublin
