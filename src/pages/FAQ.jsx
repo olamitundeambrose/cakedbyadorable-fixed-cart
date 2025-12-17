@@ -53,7 +53,7 @@ const faqs = [
     questions: [
       {
         q: "Do you deliver?",
-        a: "Yes, we offer delivery throughout Dublin and surrounding areas. Delivery fees vary based on location. For wedding cakes, we include setup at your venue."
+        a: "Yes, we offer delivery throughout Kilcock, Kildare and surrounding areas. Delivery fees vary based on location. For wedding cakes, we include setup at your venue."
       },
       {
         q: "Can I collect my cake?",

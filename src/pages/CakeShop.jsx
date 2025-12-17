@@ -17,6 +17,74 @@ const categories = [
   { id: 'birthday', label: 'Birthday' },
 ];
 
+// Demo cakes data
+const demoCakes = [
+  {
+    id: 1,
+    name: "Elegant Wedding Cake",
+    category: "wedding",
+    price: 450,
+    image_url: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80",
+    description: "Three-tier wedding cake with delicate sugar flowers and pearl details"
+  },
+  {
+    id: 2,
+    name: "Chocolate Birthday Delight",
+    category: "birthday",
+    price: 85,
+    image_url: "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=400&q=80",
+    description: "Rich chocolate cake with buttercream frosting and colorful decorations"
+  },
+  {
+    id: 3,
+    name: "Unicorn Fantasy Cake",
+    category: "novelty",
+    price: 120,
+    image_url: "https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=400&q=80",
+    description: "Magical unicorn-themed cake perfect for children's parties"
+  },
+  {
+    id: 4,
+    name: "Corporate Logo Cake",
+    category: "corporate",
+    price: 200,
+    image_url: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&q=80",
+    description: "Professional cake with custom logo design for corporate events"
+  },
+  {
+    id: 5,
+    name: "Rose Buttercream Cake",
+    category: "buttercream",
+    price: 95,
+    image_url: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&q=80",
+    description: "Beautiful buttercream roses on vanilla sponge cake"
+  },
+  {
+    id: 6,
+    name: "Vintage Wedding Tower",
+    category: "wedding",
+    price: 650,
+    image_url: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&q=80",
+    description: "Five-tier vintage-style wedding cake with intricate piping"
+  },
+  {
+    id: 7,
+    name: "Superhero Birthday Cake",
+    category: "birthday",
+    price: 110,
+    image_url: "https://images.unsplash.com/photo-1557925923-cd4648e211a0?w=400&q=80",
+    description: "Action-packed superhero themed birthday cake"
+  },
+  {
+    id: 8,
+    name: "Floral Buttercream Garden",
+    category: "buttercream",
+    price: 140,
+    image_url: "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&q=80",
+    description: "Garden-inspired cake with buttercream flowers and greenery"
+  }
+];
+
 export default function CakeShop() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
@@ -33,8 +101,8 @@ export default function CakeShop() {
 
   const { data: cakes = [], isLoading } = useQuery({
     queryKey: ['cakes'],
-    queryFn: () => base44.entities.Cake.list(),
-    initialData: [],
+    queryFn: () => Promise.resolve(demoCakes), // Use demo data instead of API
+    initialData: demoCakes,
   });
 
   const addToCartMutation = useMutation({

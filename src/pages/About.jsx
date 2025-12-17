@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Award, Heart, Clock, Users, ArrowRight } from 'lucide-react';
 import AdorableImage from '@/assets/Adorable.jpeg';
+import AdorableCakeImage from '@/assets/adorablecake1.jpeg';
 
 const stats = [
   { icon: Award, value: 15, suffix: "+", label: "Years Experience" },
@@ -94,7 +95,7 @@ export default function About() {
               transition={{ delay: 0.2 }}
               className="text-lg sm:text-xl text-stone-600 leading-relaxed"
             >
-              What started as a passion in a small Dublin kitchen has grown into one of Ireland's 
+              What started as a passion in a small Kilcock, Kildare kitchen has grown into one of Ireland's 
               most beloved cake studios. Every cake tells a story, and we're honoured to be part of yours.
             </motion.p>
           </div>
@@ -111,18 +112,11 @@ export default function About() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden">
+              <div className="aspect-[4/5]">
                 <img
                   src={AdorableImage}
                   alt="Adorable - Master Baker"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-8 -right-8 w-48 h-48 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-                <img
-                  src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=300&q=80"
-                  alt="Decorated cake"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top rounded-3xl"
                 />
               </div>
             </motion.div>
@@ -134,11 +128,11 @@ export default function About() {
             >
               <span className="text-rose-400 font-medium tracking-wider uppercase text-sm">Meet the Team</span>
               <h2 className="text-3xl sm:text-4xl font-serif font-medium text-stone-800 mt-3 mb-6">
-                The Master Bakers Behind Caked by Adorable
+                The Master Bakers Behind Cake'd by Adorable
               </h2>
               <div className="space-y-4 text-stone-600 leading-relaxed">
                 <p>
-                  With over 15 years of experience in the art of cake making, we founded Caked by Adorable 
+                  With over 15 years of experience in the art of cake making, we founded Cake'd by Adorable 
                   with a simple mission: to create unforgettable moments through extraordinary cakes.
                 </p>
                 <p>

@@ -98,7 +98,7 @@ export default function Layout({ children, currentPageName }) {
               <span className={`text-2xl font-serif font-medium transition-colors ${
                 scrolled || !isHome ? 'text-stone-800' : 'text-stone-800'
               }`}>
-                Caked by Adorable
+                Cake'd by Adorable
               </span>
             </Link>
 
@@ -146,7 +146,7 @@ export default function Layout({ children, currentPageName }) {
                   <div className="flex flex-col h-full">
                     <div className="p-6 border-b">
                       <span className="text-xl font-serif font-medium text-stone-800">
-                        Caked by Adorable
+                        Cake'd by Adorable
                       </span>
                     </div>
                     <nav className="flex-1 p-6">

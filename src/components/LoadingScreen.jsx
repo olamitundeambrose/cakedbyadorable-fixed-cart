@@ -146,7 +146,7 @@ export default function LoadingScreen({ isLoading }) {
               className="space-y-2"
             >
               <h2 className="text-2xl font-serif font-medium text-stone-800">
-                Caked by Adorable
+                Cake'd by Adorable
               </h2>
               <motion.div
                 animate={{ opacity: [0.5, 1, 0.5] }}
