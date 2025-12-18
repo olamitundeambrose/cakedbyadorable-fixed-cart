@@ -27,15 +27,15 @@ export default function Footer() {
     <footer className="bg-stone-900 text-stone-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
-        <div className="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
           {/* Brand */}
           <div className="lg:col-span-2">
             <h3 className="text-2xl font-serif text-white mb-4">Cake'd by Adorable</h3>
-            <p className="text-stone-400 mb-6 max-w-md leading-relaxed">
+            <p className="text-stone-400 mb-6 max-w-md leading-relaxed mx-auto md:mx-0">
               Crafting exquisite bespoke cakes for weddings, birthdays, and every special occasion. 
               Each creation is a masterpiece made with love and the finest ingredients.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center md:justify-start">
               <a 
                 href="https://instagram.com" 
                 target="_blank" 
@@ -103,7 +103,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="tel:+3530894405401" 
-                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors"
+                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center md:justify-start"
                 >
                   <Phone className="w-5 h-5" />
                   +353 089-440-5401
@@ -112,13 +112,13 @@ export default function Footer() {
               <li>
                 <a 
                   href="mailto:info@cakedbyadorable.ie" 
-                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors"
+                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center md:justify-start"
                 >
                   <Mail className="w-5 h-5" />
                   info@cakedbyadorable.ie
                 </a>
               </li>
-              <li className="flex items-start gap-3 text-stone-400">
+              <li className="flex items-start gap-3 text-stone-400 justify-center md:justify-start">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <span>
                   Kilcock, Kildare
@@ -129,11 +129,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="py-6 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
           <p className="text-stone-500 text-sm">
-            © {new Date().getFullYear()} Cake'd by Adorable. All rights reserved.
+            © 2026 Cake'd by Adorable. All rights reserved.
           </p>
-          <p className="text-stone-500 text-sm flex items-center gap-1">
+          <p className="text-stone-500 text-sm flex items-center gap-1 justify-center sm:justify-start">
             Made with <Heart className="w-4 h-4 text-rose-400 fill-rose-400" /> in Kilcock, Kildare
           </p>
         </div>

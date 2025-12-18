@@ -1,0 +1,81 @@
+INVOICE SUMMARY - ADORABLE CAKES WEBSITE PROJECT
+===============================================
+
+Company: Intellinex Systems
+Client: Adorable Cakes
+Invoice #: INV-2024-001
+Date: December 15, 2024
+Due Date: January 15, 2025
+
+COST BREAKDOWN:
+--------------
+
+WEBSITE DEVELOPMENT & DESIGN:
+- Custom Website Design & Development: €1,200
+- Modern Animations & Interactions: €300
+- Mobile Optimization: €200
+
+FUNCTIONALITY & FEATURES:
+- Live Chat Integration: €250
+- Contact Forms & Lead Capture: €150
+- Content Management System: €400
+
+SEO & MARKETING:
+- Search Engine Optimization (SEO): €300
+- Google Business Profile Setup: €100
+
+HOSTING & SECURITY:
+- AWS Cloud Hosting Setup: €200
+- Website Security Implementation: €150
+- Domain Setup & Configuration: €50
+
+OPTIONAL EMAIL SERVICES:
+- Professional Email Setup (one-time): €50
+- Email Hosting: €10/month (ongoing)
+
+TOTAL CALCULATION:
+-----------------
+Subtotal: €3,350
+Early Bird Discount (15%): -€502.50
+FINAL TOTAL: €2,847.50
+
+PAYMENT TERMS:
+-------------
+- 50% deposit (€1,423.75) to start project
+- 50% balance (€1,423.75) on completion
+- 6 months free support included
+- Client pays AWS hosting costs directly (€15-25/month)
+
+WHAT'S INCLUDED:
+---------------
+✓ Professional responsive website design
+✓ Up to 8 pages
+✓ Modern animations and interactions
+✓ Live chat system
+✓ SEO optimization
+✓ AWS cloud hosting setup
+✓ SSL security certificate
+✓ 6 months free support
+✓ 3 rounds of revisions
+✓ 1-hour training session
+✓ 30-day bug-fix warranty
+
+COMPETITIVE ADVANTAGE:
+--------------------
+- 20-30% below typical Irish web development rates
+- Enterprise-level AWS hosting
+- Modern design with animations
+- Comprehensive SEO package
+- Extended free support period
+- Professional business email option
+
+NEXT STEPS:
+----------
+1. Client approves invoice
+2. 50% deposit payment
+3. Project kickoff meeting
+4. Content gathering phase
+5. Design & development (4-6 weeks)
+6. Testing & launch
+7. Training & handover
+8. 6 months free support period

@@ -7,7 +7,7 @@ import { ChevronRight, Sparkles } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-rose-50 via-cream-50 to-amber-50">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-rose-50 via-cream-50 to-amber-50 pt-20 sm:pt-24">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-rose-100/40 rounded-full blur-3xl" />
@@ -22,7 +22,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center lg:text-left"
+            className="text-center lg:text-left pt-8 sm:pt-0"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cake'd by Adorable - Project Roadmap & Deliverables</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 3px solid #e74c3c;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .company-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .project-title {
+            font-size: 24px;
+            color: #e74c3c;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            color: #2c3e50;
+            border-left: 4px solid #e74c3c;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .milestone-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .milestone-card.pending {
+            border-left-color: #ffc107;
+        }
+        
+        .milestone-card.critical {
+            border-left-color: #dc3545;
+        }
+        
+        .milestone-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .milestone-date {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .milestone-date.pending {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .task-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .task-list li {
+            padding: 5px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .task-list li.completed::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        .task-list li.pending::before {
+            content: "⏳";
+            position: absolute;
+            left: 0;
+        }
+        
+        .task-list li.critical::before {
+            content: "🔴";
+            position: absolute;
+            left: 0;
+        }
+        
+        .timeline {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .timeline h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .timeline .date {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .deliverable-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .deliverable-box h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 15px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-in-progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-pending {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <img src="logo.png" alt="Intellinex Systems Logo" class="logo">
+            <div class="company-name">INTELLINEX SYSTEMS</div>
+            <div class="project-title">Cake'd by Adorable</div>
+            <div class="subtitle">Complete Project Roadmap & Deliverables</div>
+        </div>
+
+        <!-- Project Timeline -->
+        <div class="timeline">
+            <h2>🎯 Project Completion Target</h2>
+            <div class="date">January 15, 2026</div>
+            <p>Professional Website Development & Deployment</p>
+        </div>
+
+        <!-- Project Overview -->
+        <div class="section">
+            <h2 class="section-title">📋 Project Overview</h2>
+            <div class="milestone-card">
+                <div class="milestone-title">Client: Mariam - Cake'd by Adorable</div>
+                <p><strong>Business Type:</strong> Premium Cake Design & Catering</p>
+                <p><strong>Location:</strong> Kilcock, Kildare, Ireland</p>
+                <p><strong>Contact:</strong> +353 089-440-5401</p>
+                <p><strong>Project Start:</strong> December 17, 2025</p>
+                <p><strong>Expected Completion:</strong> January 15, 2026</p>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%;"></div>
+                </div>
+                <p><strong>Current Progress:</strong> 75% Complete</p>
+            </div>
+        </div>
+
+        <!-- Completed Milestones -->
+        <div class="section">
+            <h2 class="section-title">✅ Completed Milestones</h2>
+            
+            <div class="milestone-card">
+                <div class="milestone-date">December 17, 2025</div>
+                <div class="milestone-title">Phase 1: Foundation & Branding <span class="status-badge status-completed">Completed</span></div>
+                <ul class="task-list">
+                    <li class="completed">Brand identity update to "Cake'd by Adorable"</li>
+                    <li class="completed">Custom cake favicon design and implementation</li>
+                    <li class="completed">Contact information integration (Kilcock, Kildare)</li>
+                    <li class="completed">Phone number update (+353 089-440-5401)</li>
+                    <li class="completed">Location references updated throughout website</li>
+                </ul>
+            </div>
+
+            <div class="milestone-card">
+                <div class="milestone-date">December 17, 2025</div>
+                <div class="milestone-title">Phase 2: Content Customization <span class="status-badge status-completed">Completed</span></div>
+                <ul class="task-list">
+                    <li class="completed">Personal Adorable.jpeg integration in About page</li>
+                    <li class="completed">Custom cake-themed "How to Order" section with SVG icons</li>
+                    <li class="completed">Cake shop implementation with 8 demo products</li>
+                    <li class="completed">Category filtering and cart functionality</li>
+                    <li class="completed">Mobile responsiveness optimization</li>
+                </ul>
+            </div>
+
+            <div class="milestone-card">
+                <div class="milestone-date">December 17, 2025</div>
+                <div class="milestone-title">Phase 3: Development Environment <span class="status-badge status-completed">Completed</span></div>
+                <ul class="task-list">
+                    <li class="completed">Local development server configuration</li>
+                    <li class="completed">ngrok tunnel setup for public testing</li>
+                    <li class="completed">AWS S3 + CloudFront temporary deployment</li>
+                    <li class="completed">GitHub version control setup</li>
+                    <li class="completed">Project documentation creation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pending Milestones -->
+        <div class="section">
+            <h2 class="section-title">⏳ Pending Milestones</h2>
+            
+            <div class="milestone-card pending">
+                <div class="milestone-date pending">December 20-25, 2025</div>
+                <div class="milestone-title">Phase 4: Content Collection <span class="status-badge status-in-progress">In Progress</span></div>
+                <ul class="task-list">
+                    <li class="critical">Collect 8-12 professional cake photos from Mariam</li>
+                    <li class="pending">Gather accurate pricing information</li>
+                    <li class="pending">Obtain social media links and business hours</li>
+                    <li class="pending">Collect customer testimonials (optional)</li>
+                    <li class="pending">Finalize delivery areas and pricing</li>
+                </ul>
+            </div>
+
+            <div class="milestone-card pending">
+                <div class="milestone-date pending">December 26-30, 2025</div>
+                <div class="milestone-title">Phase 5: Production Implementation <span class="status-badge status-pending">Pending</span></div>
+                <ul class="task-list">
+                    <li class="pending">Replace demo cakes with real photos</li>
+                    <li class="pending">Implement accurate pricing structure</li>
+                    <li class="pending">Add cake size and flavor options</li>
+                    <li class="pending">Integrate payment gateway (if required)</li>
+                    <li class="pending">Set up order management system</li>
+                </ul>
+            </div>
+
+            <div class="milestone-card pending">
+                <div class="milestone-date pending">December 30, 2025 - January 3, 2026</div>
+                <div class="milestone-title">Phase 5.5: Contact Form Backend Integration <span class="status-badge status-pending">High Priority</span></div>
+                <ul class="task-list">
+                    <li class="critical">Set up Google Sheets API integration</li>
+                    <li class="pending">Configure Gmail API for notifications</li>
+                    <li class="pending">Create serverless form handler</li>
+                    <li class="pending">Implement spam protection</li>
+                    <li class="pending">Set up auto-response emails</li>
+                    <li class="pending">Test form submission workflow</li>
+                </ul>
+                <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 5px; font-size: 14px;">
+                    <strong>Cost-Effective Solution:</strong> Google Sheets + Gmail integration eliminates need for expensive backend servers while providing real-time notifications and data storage.
+                </div>
+            </div>
+
+            <div class="milestone-card pending">
+                <div class="milestone-date pending">January 1-5, 2026</div>
+                <div class="milestone-title">Phase 6: Testing & Quality Assurance <span class="status-badge status-pending">Pending</span></div>
+                <ul class="task-list">
+                    <li class="pending">Cross-browser testing (Chrome, Safari, Firefox, Edge)</li>
+                    <li class="pending">Mobile device testing (iOS, Android)</li>
+                    <li class="pending">Performance optimization and Lighthouse audit</li>
+                    <li class="pending">Accessibility compliance testing</li>
+                    <li class="pending">User acceptance testing with Mariam</li>
+                </ul>
+            </div>
+
+            <div class="milestone-card pending">
+                <div class="milestone-date pending">January 3-8, 2026</div>
+                <div class="milestone-title">Phase 6.5: Live Agent Integration <span class="status-badge status-pending">Medium Priority</span></div>
+                <ul class="task-list">
+                    <li class="pending">Integrate live chat widget (similar to HeartNestCare)</li>
+                    <li class="pending">Configure automated greetings and responses</li>
+                    <li class="pending">Set up mobile notifications for Mariam</li>
+                    <li class="pending">Add business hours and offline handling</li>
+                    <li class="pending">Test chat functionality across devices</li>
+                    <li class="pending">Train Mariam on chat management</li>
+                </ul>
+                <div style="margin-top: 10px; padding: 10px; background: #e8f4fd; border-radius: 5px; font-size: 14px;">
+                    <strong>Reference Implementation:</strong> Similar live agent system successfully deployed for HeartNestCare project with real-time customer support and mobile notifications.
+                </div>
+            </div>
+
+            <div class="milestone-card critical">
+                <div class="milestone-date pending">January 6-12, 2026</div>
+                <div class="milestone-title">Phase 7: Production Deployment <span class="status-badge status-pending">Critical</span></div>
+                <ul class="task-list">
+                    <li class="critical">Domain nameserver configuration</li>
+                    <li class="pending">AWS Route 53 DNS setup</li>
+                    <li class="pending">SSL certificate configuration</li>
+                    <li class="pending">Production CloudFront distribution</li>
+                    <li class="pending">Performance monitoring setup</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Final Deliverable -->
+        <div class="deliverable-box">
+            <h3>📄 Final Deliverable - January 15, 2026</h3>
+            <p><strong>Intellinex Systems will provide a comprehensive PDF document including:</strong></p>
+            <ul style="margin-top: 10px; padding-left: 20px;">
+                <li>Complete project summary and implementation details</li>
+                <li>Technical architecture and specifications</li>
+                <li>Live website URLs and access credentials</li>
+                <li>Contact form backend integration (Google Sheets + Gmail)</li>
+                <li>Live agent system setup and management guide</li>
+                <li>User guide and content management instructions</li>
+                <li>Performance metrics and testing results</li>
+                <li>Maintenance recommendations and support information</li>
+                <li>SEO optimization report and analytics setup</li>
+            </ul>
+        </div>
+
+        <!-- Technical Stack -->
+        <div class="section">
+            <h2 class="section-title">🛠️ Technical Implementation</h2>
+            <div class="milestone-card">
+                <div class="milestone-title">Technology Stack</div>
+                <div class="contact-grid">
+                    <div>
+                        <h4>Frontend Framework</h4>
+                        <p>React 18.2.0 with Vite 6.1.0</p>
+                        <p>Tailwind CSS 3.4.17</p>
+                        <p>Framer Motion animations</p>
+                    </div>
+                    <div>
+                        <h4>Cloud Infrastructure</h4>
+                        <p>AWS S3 + CloudFront</p>
+                        <p>Route 53 DNS management</p>
+                        <p>SSL/TLS encryption</p>
+                    </div>
+                    <div>
+                        <h4>Development Tools</h4>
+                        <p>GitHub version control</p>
+                        <p>ngrok for testing</p>
+                        <p>Intellinex Systems SDK integration</p>
+                    </div>
+                    <div>
+                        <h4>Performance Features</h4>
+                        <p>Mobile-first responsive design</p>
+                        <p>SEO optimization</p>
+                        <p>Fast loading times</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current URLs -->
+        <div class="section">
+            <h2 class="section-title">🌐 Current Access URLs</h2>
+            <div class="milestone-card">
+                <div class="milestone-title">Development & Testing</div>
+                <p><strong>Local Development:</strong> http://localhost:5173</p>
+                <p><strong>Public Testing (ngrok):</strong> https://6aaf2d50a89e.ngrok-free.app</p>
+                <p><strong>AWS S3 Staging:</strong> http://cakedbyadorable-website-temp.s3-website-us-east-1.amazonaws.com</p>
+                <p><strong>CloudFront CDN:</strong> https://dxslahzhiep7e.cloudfront.net</p>
+                <p><strong>Production Domain:</strong> <em>To be configured with purchased domain</em></p>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h3>📞 Project Contacts</h3>
+            <div class="contact-grid">
+                <div>
+                    <h4>Intellinex Systems</h4>
+                    <p>Development Team</p>
+                    <p>Technical Support & Implementation</p>
+                </div>
+                <div>
+                    <h4>Client: Mariam</h4>
+                    <p>Cake'd by Adorable</p>
+                    <p>Phone: +353 089-440-5401</p>
+                    <p>Email: info@cakedbyadorable.ie</p>
+                </div>
+                <div>
+                    <h4>Project Repository</h4>
+                    <p>GitHub: Intellinex Systems Private Repository</p>
+                    <p>AWS Account: 248194531461</p>
+                </div>
+                <div>
+                    <h4>Next Meeting</h4>
+                    <p>Content Collection Review</p>
+                    <p>Testing & Feedback Session</p>
+                    <p>Domain Setup Coordination</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #dee2e6; color: #6c757d;">
+            <p><strong>Document Generated:</strong> December 18, 2025</p>
+            <p><strong>Status:</strong> Development Phase - 75% Complete</p>
+            <p><strong>Next Review:</strong> December 20, 2025</p>
+        </div>
+    </div>
+</body>
+</html>

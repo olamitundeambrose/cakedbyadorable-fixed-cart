@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Adorable Cakes Website Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .invoice-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #00bcd4 0%, #673ab7 100%);
+            color: white;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .company-info h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .company-info p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .invoice-details {
+            text-align: right;
+        }
+        
+        .invoice-details h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .billing-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .bill-to, .invoice-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #673ab7;
+        }
+        
+        .bill-to h3, .invoice-info h3 {
+            color: #673ab7;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .services-table th {
+            background: linear-gradient(135deg, #00bcd4 0%, #673ab7 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .services-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .services-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .category-header {
+            background: #e3f2fd !important;
+            font-weight: bold;
+            color: #1976d2;
+        }
+        
+        .subtotal-row {
+            background: #f5f5f5;
+            font-weight: bold;
+        }
+        
+        .total-row {
+            background: linear-gradient(135deg, #00bcd4 0%, #673ab7 100%);
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .value-proposition {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px solid #673ab7;
+        }
+        
+        .value-proposition h3 {
+            color: #673ab7;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .feature-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #00bcd4;
+        }
+        
+        .feature-item h4 {
+            color: #673ab7;
+            margin-bottom: 5px;
+        }
+        
+        .terms {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+            margin-top: 30px;
+        }
+        
+        .terms h3 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            background: #263238;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+        
+        .price {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        @media print {
+            body { background: white; }
+            .invoice-container { box-shadow: none; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="logo.png" alt="Intellinex Systems Logo" style="width: 50px; height: 50px; object-fit: contain;">
+                    </div>
+                    <div class="company-info">
+                        <h1>Intellinex Systems</h1>
+                        <p>Professional Web Development & Digital Solutions</p>
+                        <p>Dublin, Ireland | info@intellinexsystems.ie | intellinexsystems.ie</p>
+                    </div>
+                </div>
+                <div class="invoice-details">
+                    <h2>INVOICE</h2>
+                    <p><strong>Invoice #:</strong> INV-2025-001</p>
+                    <p><strong>Date:</strong> December 15, 2025</p>
+                    <p><strong>Due Date:</strong> January 15, 2026</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="billing-info">
+                <div class="bill-to">
+                    <h3>Bill To:</h3>
+                    <p><strong>Adorable Cakes</strong></p>
+                    <p>Ireland</p>
+                    <p>Email: info@adorablecakes.ie</p>
+                </div>
+                <div class="invoice-info">
+                    <h3>Project Details:</h3>
+                    <p><strong>Service:</strong> Complete Website Development</p>
+                    <p><strong>Timeline:</strong> 4-6 weeks</p>
+                    <p><strong>Payment Terms:</strong> 50% upfront, 50% on completion</p>
+                </div>
+            </div>
+
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>Service Description</th>
+                        <th>Details</th>
+                        <th>Price (EUR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="category-header">
+                        <td colspan="3">WEBSITE DEVELOPMENT & DESIGN</td>
+                    </tr>
+                    <tr>
+                        <td>Custom Website Design & Development</td>
+                        <td>Responsive design, modern UI/UX, up to 8 pages</td>
+                        <td class="price">€400</td>
+                    </tr>
+                    <tr>
+                        <td>Modern Animations & Interactions</td>
+                        <td>CSS animations, smooth transitions, loading effects</td>
+                        <td class="price">€100</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile Optimization</td>
+                        <td>Fully responsive design for all devices</td>
+                        <td class="price">€100</td>
+                    </tr>
+                    
+                    <tr class="category-header">
+                        <td colspan="3">FUNCTIONALITY & FEATURES</td>
+                    </tr>
+                    <tr>
+                        <td>Live Chat Integration</td>
+                        <td>Real-time customer support chat system</td>
+                        <td class="price">€50</td>
+                    </tr>
+                    <tr>
+                        <td>Contact Forms & Lead Capture</td>
+                        <td>Custom forms with email notifications</td>
+                        <td class="price">€50</td>
+                    </tr>
+                    <tr>
+                        <td>Content Management System</td>
+                        <td>Easy-to-use admin panel for content updates</td>
+                        <td class="price">€50</td>
+                    </tr>
+                    
+                    <tr class="category-header">
+                        <td colspan="3">SEO & MARKETING</td>
+                    </tr>
+                    <tr>
+                        <td>Search Engine Optimization (SEO)</td>
+                        <td>On-page SEO, meta tags, sitemap, Google Analytics</td>
+                        <td class="price">€30</td>
+                    </tr>
+                    <tr>
+                        <td>Google Business Profile Setup</td>
+                        <td>Local SEO optimization and business listing</td>
+                        <td class="price">€20</td>
+                    </tr>
+                    
+                    <tr class="category-header">
+                        <td colspan="3">HOSTING & SECURITY</td>
+                    </tr>
+                    <tr>
+                        <td>AWS Cloud Hosting Setup</td>
+                        <td>Secure, scalable hosting with SSL certificate</td>
+                        <td class="price">€50</td>
+                    </tr>
+                    <tr>
+                        <td>Website Security Implementation</td>
+                        <td>Firewall, malware protection, security headers</td>
+                        <td class="price">€30</td>
+                    </tr>
+                    <tr>
+                        <td>Domain Setup & Configuration</td>
+                        <td>Domain connection and DNS configuration</td>
+                        <td class="price">€20</td>
+                    </tr>
+                    
+                    <tr class="category-header">
+                        <td colspan="3">OPTIONAL EMAIL SERVICES</td>
+                    </tr>
+                    <tr>
+                        <td>Professional Email Setup</td>
+                        <td>One-time setup fee for business email</td>
+                        <td class="price">€30</td>
+                    </tr>
+                    <tr>
+                        <td>Email Hosting (Monthly)</td>
+                        <td>Professional email service - €10/month after setup</td>
+                        <td class="price">€20</td>
+                    </tr>
+                    
+                    <tr class="subtotal-row">
+                        <td colspan="2"><strong>Subtotal (Development Package)</strong></td>
+                        <td class="price"><strong>€800</strong></td>
+                    </tr>
+                    <tr class="subtotal-row">
+                        <td colspan="2"><strong>Discount</strong></td>
+                        <td class="price"><strong>-€300</strong></td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2"><strong>TOTAL PROJECT COST</strong></td>
+                        <td class="price"><strong>€500</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="value-proposition">
+                <h3>🎯 What You Get With Intellinex Systems</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h4>🎨 Premium Design</h4>
+                        <p>Modern, professional design that reflects your brand and converts visitors to customers</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📱 Mobile-First Approach</h4>
+                        <p>Perfect display on all devices - phones, tablets, and desktops</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⚡ Fast Loading</h4>
+                        <p>Optimized for speed with AWS cloud hosting for reliable performance</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔒 Enterprise Security</h4>
+                        <p>Bank-level security with SSL certificates and malware protection</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📈 SEO Ready</h4>
+                        <p>Built for search engines to help customers find you online</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>💬 Live Support</h4>
+                        <p>Real-time chat to engage customers and increase sales</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="terms">
+                <h3>📋 Terms & Support</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Free Support:</strong> 6 months of free troubleshooting and minor updates after launch</li>
+                    <li><strong>Hosting:</strong> Client pays AWS hosting costs directly (typically €15-25/month)</li>
+                    <li><strong>Payment:</strong> 50% deposit to start, 50% on completion</li>
+                    <li><strong>Timeline:</strong> 4-6 weeks from deposit and content provision</li>
+                    <li><strong>Revisions:</strong> Up to 3 rounds of revisions included</li>
+                    <li><strong>Training:</strong> 1-hour training session on managing your website</li>
+                    <li><strong>Warranty:</strong> 30-day bug-fix guarantee after launch</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Intellinex Systems</strong> | Professional Web Development | Dublin, Ireland</p>
+            <p>Email: info@intellinexsystems.ie | Phone: +353 83 408 6799 | Web: intellinexsystems.ie</p>
+            <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;">Thank you for choosing Intellinex Systems for your digital transformation!</p>
+        </div>
+    </div>
+</body>
+</html>
