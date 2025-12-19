@@ -28,110 +28,115 @@ export default function Footer() {
     <footer className="bg-stone-900 text-stone-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
-        <div className="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex justify-center mb-4">
+        <div className="py-16">
+          {/* Logo and Description - Full Width Centered */}
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-6">
               <img 
                 src={logoImage} 
                 alt="Cake'd by Adorable" 
-                className="h-24 w-auto"
+                className="h-28 w-auto"
               />
             </div>
-            <p className="text-stone-400 mb-6 max-w-md leading-relaxed text-center mx-auto">
+            <p className="text-stone-400 max-w-2xl leading-relaxed mx-auto text-lg">
               Crafting exquisite bespoke cakes for weddings, birthdays, and every special occasion. 
               Each creation is a masterpiece made with love and the finest ingredients.
             </p>
-            <div className="flex gap-4 justify-center">
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://facebook.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://tiktok.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
-              >
-                <TikTokIcon />
-              </a>
-              <a 
-                href="https://youtube.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
-              >
-                <YouTubeIcon />
-              </a>
-              <a 
-                href="https://wa.me/3530894405401" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
-              >
-                <WhatsAppIcon />
-              </a>
-            </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-white font-medium mb-6">Quick Links</h4>
-            <ul className="space-y-3">
-              {['Home', 'About', 'CakeShop', 'Flavours', 'FAQ', 'Contact'].map((page) => (
-                <li key={page}>
+          {/* Footer Content Grid */}
+          <div className="grid md:grid-cols-3 gap-12 text-center max-w-4xl mx-auto">
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white font-semibold mb-6 text-lg">Quick Links</h4>
+              <div className="grid grid-cols-2 gap-y-2 gap-x-1">
+                {['Home', 'About', 'CakeShop', 'Flavours', 'FAQ', 'Contact'].map((page) => (
                   <Link 
+                    key={page}
                     to={createPageUrl(page)} 
-                    className="text-stone-400 hover:text-rose-400 transition-colors"
+                    className="text-stone-400 hover:text-rose-400 transition-colors text-base"
                   >
                     {page === 'CakeShop' ? 'Cake Shop' : page}
                   </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+                ))}
+              </div>
+            </div>
 
-          {/* Contact */}
-          <div>
-            <h4 className="text-white font-medium mb-6">Contact Us</h4>
-            <ul className="space-y-4">
-              <li>
+            {/* Contact Info */}
+            <div>
+              <h4 className="text-white font-semibold mb-6 text-lg">Contact Us</h4>
+              <ul className="space-y-4">
+                <li>
+                  <a 
+                    href="tel:+3530894405401" 
+                    className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center text-base"
+                  >
+                    <Phone className="w-5 h-5" />
+                    +353 089-440-5401
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="mailto:info@cakedbyadorable.ie" 
+                    className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center text-base"
+                  >
+                    <Mail className="w-5 h-5" />
+                    info@cakedbyadorable.ie
+                  </a>
+                </li>
+                <li className="flex items-start gap-3 text-stone-400 justify-center text-base">
+                  <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                  <span>Kilcock, Kildare</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Social Media */}
+            <div>
+              <h4 className="text-white font-semibold mb-6 text-lg">Follow Us</h4>
+              <div className="flex gap-4 justify-center">
                 <a 
-                  href="tel:+3530894405401" 
-                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center"
+                  href="https://instagram.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
                 >
-                  <Phone className="w-5 h-5" />
-                  +353 089-440-5401
+                  <Instagram className="w-6 h-6" />
                 </a>
-              </li>
-              <li>
                 <a 
-                  href="mailto:info@cakedbyadorable.ie" 
-                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center"
+                  href="https://facebook.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
                 >
-                  <Mail className="w-5 h-5" />
-                  info@cakedbyadorable.ie
+                  <Facebook className="w-6 h-6" />
                 </a>
-              </li>
-              <li className="flex items-start gap-3 text-stone-400 justify-center">
-                <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                <span>
-                  Kilcock, Kildare
-                </span>
-              </li>
-            </ul>
+                <a 
+                  href="https://tiktok.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
+                >
+                  <TikTokIcon />
+                </a>
+                <a 
+                  href="https://youtube.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
+                >
+                  <YouTubeIcon />
+                </a>
+                <a 
+                  href="https://wa.me/3530894405401" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
+                >
+                  <WhatsAppIcon />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
