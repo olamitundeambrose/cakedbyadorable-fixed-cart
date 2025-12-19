@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Footer from '@/components/home/Footer';
 import LoadingScreen from '@/components/LoadingScreen';
+import logoImage from '@/assets/logo.png';
 
 const navLinks = [
   { name: 'Home', page: 'Home' },
@@ -92,15 +93,86 @@ export default function Layout({ children, currentPageName }) {
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link to={createPageUrl('Home')} className="flex items-center">
-              <span className={`text-2xl font-serif font-medium transition-colors ${
-                scrolled || !isHome ? 'text-stone-800' : 'text-stone-800'
-              }`}>
-                Cake'd by Adorable
-              </span>
-            </Link>
+          <div className="flex items-center justify-between lg:justify-between h-20">
+            {/* Mobile: Center logo, hide on mobile and show cart/menu on sides */}
+            <div className="lg:hidden flex items-center justify-between w-full">
+              <div className="w-10"></div> {/* Spacer */}
+              <Link to={createPageUrl('Home')} className="flex items-center">
+                <img 
+                  src={logoImage} 
+                  alt="Cake'd by Adorable" 
+                  className="h-28 w-auto"
+                />
+              </Link>
+              <div className="flex items-center gap-4">
+                <Link to={createPageUrl('Cart')}>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={`relative ${scrolled || !isHome ? 'text-stone-700' : 'text-stone-700'}`}
+                  >
+                    <ShoppingCart className="w-5 h-5" />
+                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-rose-400 text-white text-xs rounded-full flex items-center justify-center">
+                      {cartCount}
+                    </span>
+                  </Button>
+                </Link>
+                <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="ghost" size="icon">
+                      <Menu className="w-6 h-6" />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="right" className="w-full sm:w-80 p-0">
+                    <div className="flex flex-col h-full">
+                      <div className="p-6 border-b flex justify-center">
+                        <img 
+                          src={logoImage} 
+                          alt="Cake'd by Adorable" 
+                          className="h-24 w-auto"
+                        />
+                      </div>
+                      <nav className="flex-1 p-6">
+                        <ul className="space-y-4">
+                          {navLinks.map((link) => (
+                            <li key={link.page}>
+                              <Link
+                                to={createPageUrl(link.page)}
+                                className={`block py-2 text-lg font-medium transition-colors ${
+                                  currentPageName === link.page
+                                    ? 'text-rose-500'
+                                    : 'text-stone-600 hover:text-stone-900'
+                                }`}
+                              >
+                                {link.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </nav>
+                      <div className="p-6 border-t">
+                        <Link to={createPageUrl('Cart')}>
+                          <Button className="w-full bg-stone-800 hover:bg-stone-900 rounded-full">
+                            View Cart ({cartCount})
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </SheetContent>
+                </Sheet>
+              </div>
+            </div>
+
+            {/* Desktop Layout */}
+            <div className="hidden lg:flex items-center justify-between w-full">
+              {/* Logo */}
+              <Link to={createPageUrl('Home')} className="flex items-center mt-8">
+                <img 
+                  src={logoImage} 
+                  alt="Cake'd by Adorable" 
+                  className="h-40 w-auto"
+                />
+              </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8">
@@ -120,8 +192,8 @@ export default function Layout({ children, currentPageName }) {
               ))}
             </nav>
 
-            {/* Cart & Mobile Menu */}
-            <div className="flex items-center gap-4">
+            {/* Desktop Cart */}
+            <div className="hidden lg:flex items-center gap-4">
               <Link to={createPageUrl('Cart')}>
                 <Button
                   variant="ghost"
@@ -134,49 +206,7 @@ export default function Layout({ children, currentPageName }) {
                   </span>
                 </Button>
               </Link>
-
-              {/* Mobile Menu */}
-              <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-                <SheetTrigger asChild className="lg:hidden">
-                  <Button variant="ghost" size="icon">
-                    <Menu className="w-6 h-6" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-full sm:w-80 p-0">
-                  <div className="flex flex-col h-full">
-                    <div className="p-6 border-b">
-                      <span className="text-xl font-serif font-medium text-stone-800">
-                        Cake'd by Adorable
-                      </span>
-                    </div>
-                    <nav className="flex-1 p-6">
-                      <ul className="space-y-4">
-                        {navLinks.map((link) => (
-                          <li key={link.page}>
-                            <Link
-                              to={createPageUrl(link.page)}
-                              className={`block py-2 text-lg font-medium transition-colors ${
-                                currentPageName === link.page
-                                  ? 'text-rose-500'
-                                  : 'text-stone-600 hover:text-stone-900'
-                              }`}
-                            >
-                              {link.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </nav>
-                    <div className="p-6 border-t">
-                      <Link to={createPageUrl('Cart')}>
-                        <Button className="w-full bg-stone-800 hover:bg-stone-900 rounded-full">
-                          View Cart ({cartCount})
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </SheetContent>
-              </Sheet>
+            </div>
             </div>
           </div>
         </div>

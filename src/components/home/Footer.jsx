@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Phone, Mail, MapPin, Instagram, Facebook, Heart, MessageCircle } from 'lucide-react';
+import logoImage from '@/assets/logo.png';
 
 // Custom social media icons
 const TikTokIcon = () => (
@@ -27,15 +28,21 @@ export default function Footer() {
     <footer className="bg-stone-900 text-stone-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
-        <div className="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
+        <div className="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <h3 className="text-2xl font-serif text-white mb-4">Cake'd by Adorable</h3>
-            <p className="text-stone-400 mb-6 max-w-md leading-relaxed mx-auto md:mx-0">
+            <div className="flex justify-center mb-4">
+              <img 
+                src={logoImage} 
+                alt="Cake'd by Adorable" 
+                className="h-24 w-auto"
+              />
+            </div>
+            <p className="text-stone-400 mb-6 max-w-md leading-relaxed text-center mx-auto">
               Crafting exquisite bespoke cakes for weddings, birthdays, and every special occasion. 
               Each creation is a masterpiece made with love and the finest ingredients.
             </p>
-            <div className="flex gap-4 justify-center md:justify-start">
+            <div className="flex gap-4 justify-center">
               <a 
                 href="https://instagram.com" 
                 target="_blank" 
@@ -103,7 +110,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="tel:+3530894405401" 
-                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center md:justify-start"
+                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center"
                 >
                   <Phone className="w-5 h-5" />
                   +353 089-440-5401
@@ -112,13 +119,13 @@ export default function Footer() {
               <li>
                 <a 
                   href="mailto:info@cakedbyadorable.ie" 
-                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center md:justify-start"
+                  className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center"
                 >
                   <Mail className="w-5 h-5" />
                   info@cakedbyadorable.ie
                 </a>
               </li>
-              <li className="flex items-start gap-3 text-stone-400 justify-center md:justify-start">
+              <li className="flex items-start gap-3 text-stone-400 justify-center">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <span>
                   Kilcock, Kildare
