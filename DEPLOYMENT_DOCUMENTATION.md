@@ -3,10 +3,13 @@
 ## Project Overview
 Successfully deployed the "Cake'd by Adorable" React website to AWS using S3, CloudFront, and Route 53.
 
+**GitHub Repository**: `https://github.com/aderonke-gif/cakedbyadorable`
+
 ## Deployment Summary - January 2, 2026
 
 ### 1. Source Code Location
 - **Local Path**: `\\wsl.localhost\Ubuntu-24.04\home\aderonke_joy\cakedbyadorable`
+- **GitHub Repository**: `https://github.com/aderonke-gif/cakedbyadorable`
 - **Project Type**: React + Vite application with Base44 SDK
 - **Build Command**: `npm run build`
 - **Output Directory**: `dist/`
@@ -117,7 +120,13 @@ dist/
 - **Route 53**: $0.50/month for hosted zone
 - **SSL Certificate**: Free with ACM
 
-### 9. Security & Performance
+### 9. Version Control
+- **GitHub Repository**: `https://github.com/aderonke-gif/cakedbyadorable`
+- **Branch**: `main`
+- **Last Commit**: Email updates and AWS deployment fixes
+- **Commit Hash**: `9dbdc79`
+
+### 10. Security & Performance
 - **HTTPS**: Enforced via CloudFront
 - **Caching**: Static assets cached at edge locations
 - **Compression**: Enabled for faster loading
@@ -126,6 +135,9 @@ dist/
 ## Status: ✅ DEPLOYMENT SUCCESSFUL
 All URLs are working and the website is live. Ready for production use at `https://cakedbyadorable.intellinexsystems.ie`.
 
+**GitHub Repository**: `https://github.com/aderonke-gif/cakedbyadorable`
+
 ---
 *Deployment completed: January 2, 2026*
-*Last updated: Files synced and cache invalidated*
+*Last updated: Files synced, cache invalidated, and pushed to GitHub*
+*GitHub Repository: https://github.com/aderonke-gif/cakedbyadorable*
