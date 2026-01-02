@@ -58,8 +58,8 @@ export default function Contact() {
     {
       icon: Mail,
       title: "Email",
-      content: "michael@creativecakes.ie",
-      link: "mailto:michael@creativecakes.ie"
+      content: "adorablecakesie@gmail.com",
+      link: "mailto:adorablecakesie@gmail.com"
     },
     {
       icon: MapPin,
@@ -130,7 +130,7 @@ export default function Contact() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      placeholder="john@example.com"
+                      placeholder="adorablecakesie@gmail.com"
                       required
                       className="rounded-xl border-stone-200 focus:border-rose-400 focus:ring-rose-400"
                     />

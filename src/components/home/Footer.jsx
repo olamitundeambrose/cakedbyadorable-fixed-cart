@@ -77,11 +77,11 @@ export default function Footer() {
                 </li>
                 <li>
                   <a 
-                    href="mailto:info@cakedbyadorable.ie" 
+                    href="mailto:adorablecakesie@gmail.com" 
                     className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center text-base"
                   >
                     <Mail className="w-5 h-5" />
-                    info@cakedbyadorable.ie
+                    adorablecakesie@gmail.com
                   </a>
                 </li>
                 <li className="flex items-start gap-3 text-stone-400 justify-center text-base">

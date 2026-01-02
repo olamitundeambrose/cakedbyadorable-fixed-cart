@@ -1,0 +1,16 @@
+{
+  "name": "Cake'd by Adorable",
+  "short_name": "CakedByAdorable",
+  "description": "Custom cake ordering website",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ec4899",
+  "icons": [
+    {
+      "src": "/cake-favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

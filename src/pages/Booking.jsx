@@ -202,7 +202,7 @@ export default function Booking() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    placeholder="your@email.com"
+                    placeholder="adorablecakesie@gmail.com"
                     required
                     className="rounded-xl bg-white border-stone-200"
                   />
