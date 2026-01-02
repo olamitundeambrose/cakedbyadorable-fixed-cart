@@ -25,7 +25,7 @@ const WhatsAppIcon = () => (
 
 export default function Footer() {
   return (
-    <footer className="bg-stone-900 text-stone-300">
+    <footer className="bg-black text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
         <div className="py-16">
@@ -38,7 +38,7 @@ export default function Footer() {
                 className="h-28 w-auto"
               />
             </div>
-            <p className="text-stone-400 max-w-2xl leading-relaxed mx-auto text-lg">
+            <p className="text-pink-200 max-w-2xl leading-relaxed mx-auto text-lg">
               Crafting exquisite bespoke cakes for weddings, birthdays, and every special occasion. 
               Each creation is a masterpiece made with love and the finest ingredients.
             </p>
@@ -54,7 +54,7 @@ export default function Footer() {
                   <Link 
                     key={page}
                     to={createPageUrl(page)} 
-                    className="text-stone-400 hover:text-rose-400 transition-colors text-base"
+                    className="text-pink-200 hover:text-pink-400 transition-colors text-base"
                   >
                     {page === 'CakeShop' ? 'Cake Shop' : page}
                   </Link>
@@ -69,7 +69,7 @@ export default function Footer() {
                 <li>
                   <a 
                     href="tel:+3530894405401" 
-                    className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center text-base"
+                    className="flex items-center gap-3 text-pink-200 hover:text-pink-400 transition-colors justify-center text-base"
                   >
                     <Phone className="w-5 h-5" />
                     +353 089-440-5401
@@ -78,13 +78,13 @@ export default function Footer() {
                 <li>
                   <a 
                     href="mailto:adorablecakesie@gmail.com" 
-                    className="flex items-center gap-3 text-stone-400 hover:text-rose-400 transition-colors justify-center text-base"
+                    className="flex items-center gap-3 text-pink-200 hover:text-pink-400 transition-colors justify-center text-base"
                   >
                     <Mail className="w-5 h-5" />
                     adorablecakesie@gmail.com
                   </a>
                 </li>
-                <li className="flex items-start gap-3 text-stone-400 justify-center text-base">
+                <li className="flex items-start gap-3 text-pink-200 justify-center text-base">
                   <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                   <span>Kilcock, Kildare</span>
                 </li>
@@ -99,7 +99,7 @@ export default function Footer() {
                   href="https://instagram.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
+                  className="w-12 h-12 rounded-full bg-pink-200 flex items-center justify-center hover:bg-pink-400 text-black transition-colors"
                 >
                   <Instagram className="w-6 h-6" />
                 </a>
@@ -107,7 +107,7 @@ export default function Footer() {
                   href="https://facebook.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
+                  className="w-12 h-12 rounded-full bg-pink-200 flex items-center justify-center hover:bg-pink-400 text-black transition-colors"
                 >
                   <Facebook className="w-6 h-6" />
                 </a>
@@ -115,7 +115,7 @@ export default function Footer() {
                   href="https://tiktok.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
+                  className="w-12 h-12 rounded-full bg-pink-200 flex items-center justify-center hover:bg-pink-400 text-black transition-colors"
                 >
                   <TikTokIcon />
                 </a>
@@ -123,7 +123,7 @@ export default function Footer() {
                   href="https://youtube.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
+                  className="w-12 h-12 rounded-full bg-pink-200 flex items-center justify-center hover:bg-pink-400 text-black transition-colors"
                 >
                   <YouTubeIcon />
                 </a>
@@ -131,7 +131,7 @@ export default function Footer() {
                   href="https://wa.me/3530894405401" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-stone-800 flex items-center justify-center hover:bg-rose-400 transition-colors"
+                  className="w-12 h-12 rounded-full bg-pink-200 flex items-center justify-center hover:bg-pink-400 text-black transition-colors"
                 >
                   <WhatsAppIcon />
                 </a>
@@ -141,12 +141,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
-          <p className="text-stone-500 text-sm">
+        <div className="py-6 border-t border-pink-200 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+          <p className="text-pink-200 text-sm">
             © 2026 Cake'd by Adorable. All rights reserved.
           </p>
-          <p className="text-stone-500 text-sm flex items-center gap-1 justify-center sm:justify-start">
-            Made with <Heart className="w-4 h-4 text-rose-400 fill-rose-400" /> in Kilcock, Kildare
+          <p className="text-pink-200 text-sm flex items-center gap-1 justify-center sm:justify-start">
+            Made with <Heart className="w-4 h-4 text-pink-400 fill-pink-400" /> in Kilcock, Kildare
           </p>
         </div>
       </div>
