@@ -136,12 +136,15 @@ export default function About() {
                   with a simple mission: to create unforgettable moments through extraordinary cakes.
                 </p>
                 <p>
-                  Trained in classical patisserie and constantly innovating, we combine traditional 
-                  techniques with modern design to create cakes that are as beautiful as they are delicious.
+                  Our master baker brings a unique blend of natural talent, self-taught expertise, and 
+                  relentless passion for perfection. Through years of experimentation and dedication, 
+                  we've developed signature techniques that set our cakes apart.
                 </p>
                 <p>
                   Every cake that leaves our studio is crafted with meticulous attention to detail, using 
-                  only the finest ingredients sourced from local Irish suppliers wherever possible.
+                  only the finest ingredients sourced from local Irish suppliers wherever possible. 
+                  What we lack in formal training, we make up for with heart, creativity, and an 
+                  unwavering commitment to excellence.
                 </p>
               </div>
               <div className="mt-8">
