@@ -103,8 +103,15 @@ export default function CakeShop() {
   const cakes = demoCakes;
 
   const handleAddToCart = (cake) => {
-    addToCart(cake);
-    toast.success('Added to cart!');
+    try {
+      console.log('Adding cake to cart:', cake);
+      addToCart(cake);
+      console.log('Cart updated successfully');
+      toast.success('Added to cart!');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      toast.error('Failed to add to cart');
+    }
   };
 
   const filteredCakes = selectedCategory === 'all' 

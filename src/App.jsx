@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import CookieConsent from '@/components/CookieConsent';
-import { CartProvider } from '@/contexts/CartContext';
+import { Toaster as SonnerToaster } from 'sonner';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -55,15 +55,14 @@ const AuthenticatedApp = () => {
 function App() {
   return (
     <QueryClientProvider client={queryClientInstance}>
-      <CartProvider>
-        <Router>
-          <NavigationTracker />
-          <AuthenticatedApp />
-        </Router>
-        <Toaster />
-        <VisualEditAgent />
-        <CookieConsent />
-      </CartProvider>
+      <Router>
+        <NavigationTracker />
+        <AuthenticatedApp />
+      </Router>
+      <Toaster />
+      <SonnerToaster />
+      <VisualEditAgent />
+      <CookieConsent />
     </QueryClientProvider>
   )
 }
