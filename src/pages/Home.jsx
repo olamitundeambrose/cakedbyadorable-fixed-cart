@@ -4,13 +4,13 @@ import CategoriesSection from '@/components/home/CategoriesSection';
 import WeddingServicesSection from '@/components/home/WeddingServicesSection';
 import HowToOrderSection from '@/components/home/HowToOrderSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
-import CakeBuilder from '@/components/CakeBuilder';
+import CakeBuilderPromo from '@/components/CakeBuilderPromo';
 
 export default function Home() {
   return (
     <div>
       <HeroSection />
-      <CakeBuilder />
+      <CakeBuilderPromo />
       <CategoriesSection />
       <WeddingServicesSection />
       <HowToOrderSection />
