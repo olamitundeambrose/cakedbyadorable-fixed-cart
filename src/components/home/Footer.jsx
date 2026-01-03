@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Phone, Mail, MapPin, Instagram, Facebook, Heart, MessageCircle } from 'lucide-react';
-import logoImage from '@/assets/logo.png';
+import footerLogoImage from '@/assets/footer-logo.png';
 
 // Custom social media icons
 const TikTokIcon = () => (
@@ -33,9 +33,9 @@ export default function Footer() {
           <div className="text-center mb-12">
             <div className="flex justify-center mb-6">
               <img 
-                src={logoImage} 
+                src={footerLogoImage} 
                 alt="Cake'd by Adorable" 
-                className="h-28 w-auto"
+                className="h-40 w-auto"
               />
             </div>
             <p className="text-pink-200 max-w-2xl leading-relaxed mx-auto text-lg">
