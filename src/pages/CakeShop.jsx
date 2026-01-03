@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
 import { ShoppingCart, Plus, Filter, X } from 'lucide-react';
-import CakeBuilder from '@/components/CakeBuilder';
+import CakeBuilderFixed from '@/components/CakeBuilderFixed';
 
 const categories = [
   { id: 'all', label: 'All Cakes' },
@@ -127,7 +127,7 @@ export default function CakeShop() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-rose-50/30 to-white">
       {/* Cake Builder Section */}
-      <CakeBuilder />
+      <CakeBuilderFixed />
       
       {/* Header */}
       <section className="py-16 sm:py-24 bg-gradient-to-br from-rose-50 via-white to-amber-50">

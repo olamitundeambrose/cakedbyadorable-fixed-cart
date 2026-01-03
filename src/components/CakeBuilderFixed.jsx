@@ -3,73 +3,61 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Textarea } from '@/components/ui/textarea';
 import { ChefHat, Cake, Palette, Star, Plus, Minus, ShoppingCart } from 'lucide-react';
 
-const CakeBuilder = () => {
+const CakeBuilderFixed = () => {
   const [selectedOptions, setSelectedOptions] = useState({
     size: null,
     cakeType: null,
     finishColor: null,
     flavor: null,
     filling: null,
-    designAccessories: [], // Initialize as empty array
+    designAccessories: [],
     description: '',
-    cupcakes: null,
-    deliveryOption: null,
-    deliveryDate: ''
+    cupcakes: 'none',
+    deliveryOption: null
   });
 
-  const [basePrice] = useState(160);
+  const basePrice = 160;
 
   const options = {
     size: [
       { id: '6inch', name: '6" Round', serves: '6-8 people', price: 0 },
       { id: '8inch', name: '8" Round', serves: '10-12 people', price: 25 },
-      { id: '10inch', name: '10" Round', serves: '15-18 people', price: 50 },
-      { id: 'sheet', name: '9x13" Sheet', serves: '20-25 people', price: 60 }
+      { id: '10inch', name: '10" Round', serves: '15-18 people', price: 50 }
     ],
     cakeType: [
       { id: 'round', name: 'Round Cake', price: 0 },
       { id: 'square', name: 'Square Cake', price: 5 },
       { id: 'heart', name: 'Heart Shaped', price: 15 },
-      { id: 'number', name: 'Number Cake', price: 20 },
-      { id: 'character', name: 'Character Shape', price: 30 }
+      { id: 'number', name: 'Number Cake', price: 20 }
     ],
     finishColor: [
       { id: 'white', name: 'Classic White', price: 0 },
       { id: 'pink', name: 'Pink', price: 0 },
       { id: 'blue', name: 'Blue', price: 0 },
       { id: 'gold', name: 'Gold Metallic', price: 10 },
-      { id: 'silver', name: 'Silver Metallic', price: 10 },
-      { id: 'rainbow', name: 'Rainbow', price: 15 }
+      { id: 'silver', name: 'Silver Metallic', price: 10 }
     ],
     flavor: [
       { id: 'vanilla', name: 'Classic Vanilla', price: 0 },
       { id: 'chocolate', name: 'Rich Chocolate', price: 0 },
       { id: 'strawberry', name: 'Fresh Strawberry', price: 5 },
-      { id: 'lemon', name: 'Zesty Lemon', price: 5 },
-      { id: 'red-velvet', name: 'Red Velvet', price: 10 },
-      { id: 'carrot', name: 'Spiced Carrot', price: 10 },
-      { id: 'funfetti', name: 'Funfetti', price: 8 }
+      { id: 'red-velvet', name: 'Red Velvet', price: 10 }
     ],
     filling: [
       { id: 'none', name: 'No Filling', price: 0 },
       { id: 'jam', name: 'Strawberry Jam', price: 8 },
       { id: 'cream', name: 'Fresh Cream', price: 10 },
-      { id: 'chocolate', name: 'Chocolate Ganache', price: 12 },
-      { id: 'caramel', name: 'Salted Caramel', price: 15 },
-      { id: 'nutella', name: 'Nutella', price: 12 }
+      { id: 'chocolate', name: 'Chocolate Ganache', price: 12 }
     ],
     designAccessories: [
       { id: 'theme', name: 'Add a Theme (e.g SpiderMan, Frozen, Liverpool, etc)', price: 20 },
       { id: 'fans-balls', name: 'Decorative Fans & Balls', price: 10 },
       { id: 'balls', name: 'Decorative Balls', price: 5 },
-      { id: 'flowers-fan', name: 'Flowers & Decorative Fan', price: 10 },
       { id: 'topper', name: 'Personalised Topper/Name-Age Tags', price: 10 },
-      { id: 'flower-toppers', name: 'Flower/Floral Toppers', price: 5 },
-      { id: 'rainbow', name: 'Fondant Rainbow Accessories', price: 5 },
-      { id: 'teddy', name: 'Fondant Teddy Bears', price: 10 },
-      { id: 'fondant', name: 'Fondant Accessories', price: 10 }
+      { id: 'flowers', name: 'Flower/Floral Toppers', price: 5 }
     ],
     cupcakes: [
       { id: 'none', name: 'None', price: 0 },
@@ -85,16 +73,18 @@ const CakeBuilder = () => {
   const calculateTotal = () => {
     let total = basePrice;
     
-    Object.keys(selectedOptions).forEach(category => {
-      if (category === 'designAccessories') {
-        selectedOptions.designAccessories?.forEach(accessoryId => {
-          const accessory = options.designAccessories?.find(a => a.id === accessoryId);
-          if (accessory) total += accessory.price;
-        });
-      } else if (selectedOptions[category] && options[category]) {
-        const option = options[category]?.find(opt => opt.id === selectedOptions[category]);
+    // Add selected option prices
+    ['size', 'cakeType', 'finishColor', 'flavor', 'filling', 'cupcakes', 'deliveryOption'].forEach(category => {
+      if (selectedOptions[category] && options[category]) {
+        const option = options[category].find(opt => opt.id === selectedOptions[category]);
         if (option) total += option.price;
       }
+    });
+    
+    // Add design accessories
+    selectedOptions.designAccessories.forEach(accessoryId => {
+      const accessory = options.designAccessories.find(a => a.id === accessoryId);
+      if (accessory) total += accessory.price;
     });
     
     return total;
@@ -110,9 +100,9 @@ const CakeBuilder = () => {
   const handleAccessoryToggle = (accessoryId) => {
     setSelectedOptions(prev => ({
       ...prev,
-      designAccessories: (prev.designAccessories || []).includes(accessoryId)
-        ? (prev.designAccessories || []).filter(id => id !== accessoryId)
-        : [...(prev.designAccessories || []), accessoryId]
+      designAccessories: prev.designAccessories.includes(accessoryId)
+        ? prev.designAccessories.filter(id => id !== accessoryId)
+        : [...prev.designAccessories, accessoryId]
     }));
   };
 
@@ -138,10 +128,9 @@ const CakeBuilder = () => {
             Regular price €{basePrice}.00 EUR
           </div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-            Design your little one's dream cake with our "Create Your Kids Cake" category! Explore endless 
-            possibilities—choose flavors, themes, colors, and personalize with custom details. From superheroes 
-            to unicorns, make their celebration truly magical. We customise your cakes with 2D toppers and 
-            non-edible props, crafting a one-of-a-kind cake for your special day.
+            Design your little one's dream cake! Explore endless possibilities—choose flavors, themes, 
+            colors, and personalize with custom details. From superheroes to unicorns, make their 
+            celebration truly magical.
           </p>
         </div>
 
@@ -152,14 +141,11 @@ const CakeBuilder = () => {
             {/* Size Selection */}
             <Card className="border-pink-200">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-black">
-                  <Cake className="w-5 h-5 text-pink-500" />
-                  Choose Your Size
-                </CardTitle>
+                <CardTitle className="text-black">Select Your Size</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {options.size?.map((size) => (
+                  {options.size.map((size) => (
                     <div
                       key={size.id}
                       onClick={() => handleOptionSelect('size', size.id)}
@@ -182,14 +168,14 @@ const CakeBuilder = () => {
               </CardContent>
             </Card>
 
-            {/* Cake Type Selection */}
+            {/* Cake Type */}
             <Card className="border-pink-200">
               <CardHeader>
                 <CardTitle className="text-black">Cake Type</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {options.cakeType?.map((type) => (
+                  {options.cakeType.map((type) => (
                     <div
                       key={type.id}
                       onClick={() => handleOptionSelect('cakeType', type.id)}
@@ -211,7 +197,7 @@ const CakeBuilder = () => {
               </CardContent>
             </Card>
 
-            {/* Finish Color Selection */}
+            {/* Finish Color */}
             <Card className="border-pink-200">
               <CardHeader>
                 <CardTitle className="text-black">Finish Color</CardTitle>
@@ -219,7 +205,7 @@ const CakeBuilder = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {options.finishColor?.map((color) => (
+                  {options.finishColor.map((color) => (
                     <div
                       key={color.id}
                       onClick={() => handleOptionSelect('finishColor', color.id)}
@@ -244,14 +230,11 @@ const CakeBuilder = () => {
             {/* Flavor Selection */}
             <Card className="border-pink-200">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-black">
-                  <Star className="w-5 h-5 text-pink-500" />
-                  Select Your Flavor
-                </CardTitle>
+                <CardTitle className="text-black">Select Your Flavor</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {options.flavor?.map((flavor) => (
+                  {options.flavor.map((flavor) => (
                     <div
                       key={flavor.id}
                       onClick={() => handleOptionSelect('flavor', flavor.id)}
@@ -276,11 +259,11 @@ const CakeBuilder = () => {
             {/* Filling Selection */}
             <Card className="border-pink-200">
               <CardHeader>
-                <CardTitle className="text-black">Choose Your Filling</CardTitle>
+                <CardTitle className="text-black">Select Your Filling</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {options.filling?.map((filling) => (
+                  {options.filling.map((filling) => (
                     <div
                       key={filling.id}
                       onClick={() => handleOptionSelect('filling', filling.id)}
@@ -302,97 +285,112 @@ const CakeBuilder = () => {
               </CardContent>
             </Card>
 
-            {/* Frosting Selection */}
+            {/* Design Accessories */}
             <Card className="border-pink-200">
               <CardHeader>
-                <CardTitle className="text-black">Select Your Frosting</CardTitle>
+                <CardTitle className="text-black">Design Accessories</CardTitle>
+                <p className="text-sm text-gray-600">Select the accessories for your cake</p>
               </CardHeader>
               <CardContent>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {options.frosting.map((frosting) => (
+                <div className="space-y-3">
+                  {options.designAccessories.map((accessory) => (
                     <div
-                      key={frosting.id}
-                      onClick={() => handleOptionSelect('frosting', frosting.id)}
+                      key={accessory.id}
+                      onClick={() => handleAccessoryToggle(accessory.id)}
                       className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                        selectedOptions.frosting === frosting.id
+                        selectedOptions.designAccessories.includes(accessory.id)
                           ? 'border-pink-400 bg-pink-50'
                           : 'border-gray-200 hover:border-pink-200'
                       }`}
                     >
                       <div className="flex justify-between items-center">
-                        <h4 className="font-semibold text-black">{frosting.name}</h4>
-                        <Badge variant="outline" className="text-pink-600">
-                          {frosting.price === 0 ? 'Included' : 
-                           frosting.price < 0 ? `€${frosting.price}` : `+€${frosting.price}`}
-                        </Badge>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Decoration Selection */}
-            <Card className="border-pink-200">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-black">
-                  <Palette className="w-5 h-5 text-pink-500" />
-                  Choose Your Decoration
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {options.decoration.map((decoration) => (
-                    <div
-                      key={decoration.id}
-                      onClick={() => handleOptionSelect('decoration', decoration.id)}
-                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                        selectedOptions.decoration === decoration.id
-                          ? 'border-pink-400 bg-pink-50'
-                          : 'border-gray-200 hover:border-pink-200'
-                      }`}
-                    >
-                      <div className="flex justify-between items-center">
-                        <h4 className="font-semibold text-black">{decoration.name}</h4>
-                        <Badge variant="outline" className="text-pink-600">
-                          {decoration.price === 0 ? 'Included' : `+€${decoration.price}`}
-                        </Badge>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Extras */}
-            <Card className="border-pink-200">
-              <CardHeader>
-                <CardTitle className="text-black">Add Extras (Optional)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {options.extras.map((extra) => (
-                    <div
-                      key={extra.id}
-                      onClick={() => handleExtraToggle(extra.id)}
-                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                        selectedOptions.extras.includes(extra.id)
-                          ? 'border-pink-400 bg-pink-50'
-                          : 'border-gray-200 hover:border-pink-200'
-                      }`}
-                    >
-                      <div className="flex justify-between items-center">
-                        <h4 className="font-semibold text-black">{extra.name}</h4>
+                        <h4 className="font-semibold text-black">{accessory.name}</h4>
                         <div className="flex items-center gap-2">
                           <Badge variant="outline" className="text-pink-600">
-                            +€{extra.price}
+                            +€{accessory.price}
                           </Badge>
-                          {selectedOptions.extras.includes(extra.id) ? (
+                          {selectedOptions.designAccessories.includes(accessory.id) ? (
                             <Minus className="w-4 h-4 text-pink-500" />
                           ) : (
                             <Plus className="w-4 h-4 text-gray-400" />
                           )}
                         </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Description */}
+            <Card className="border-pink-200">
+              <CardHeader>
+                <CardTitle className="text-black">Description</CardTitle>
+                <p className="text-sm text-gray-600">
+                  Describe your dream cake and the theme, add special message, name, age, color and whatever you think we should know 😊
+                </p>
+              </CardHeader>
+              <CardContent>
+                <Textarea
+                  placeholder="Tell us about your dream cake..."
+                  value={selectedOptions.description}
+                  onChange={(e) => setSelectedOptions(prev => ({ ...prev, description: e.target.value }))}
+                  className="min-h-[100px]"
+                />
+              </CardContent>
+            </Card>
+
+            {/* Matching Cupcakes */}
+            <Card className="border-pink-200">
+              <CardHeader>
+                <CardTitle className="text-black">Add Matching Cupcakes</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid sm:grid-cols-3 gap-4">
+                  {options.cupcakes.map((cupcake) => (
+                    <div
+                      key={cupcake.id}
+                      onClick={() => handleOptionSelect('cupcakes', cupcake.id)}
+                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                        selectedOptions.cupcakes === cupcake.id
+                          ? 'border-pink-400 bg-pink-50'
+                          : 'border-gray-200 hover:border-pink-200'
+                      }`}
+                    >
+                      <div className="text-center">
+                        <h4 className="font-semibold text-black mb-2">{cupcake.name}</h4>
+                        <Badge variant="outline" className="text-pink-600">
+                          {cupcake.price === 0 ? 'Included' : `+€${cupcake.price}`}
+                        </Badge>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Delivery Options */}
+            <Card className="border-pink-200">
+              <CardHeader>
+                <CardTitle className="text-black">Delivery Options</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {options.deliveryOption.map((delivery) => (
+                    <div
+                      key={delivery.id}
+                      onClick={() => handleOptionSelect('deliveryOption', delivery.id)}
+                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                        selectedOptions.deliveryOption === delivery.id
+                          ? 'border-pink-400 bg-pink-50'
+                          : 'border-gray-200 hover:border-pink-200'
+                      }`}
+                    >
+                      <div className="text-center">
+                        <h4 className="font-semibold text-black mb-2">{delivery.name}</h4>
+                        <Badge variant="outline" className="text-pink-600">
+                          {delivery.price === 0 ? 'Free' : `+€${delivery.price}`}
+                        </Badge>
                       </div>
                     </div>
                   ))}
@@ -425,59 +423,37 @@ const CakeBuilder = () => {
                     </div>
                   )}
                   
-                  {selectedOptions.flavor && options.flavor.find(f => f.id === selectedOptions.flavor)?.price > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">
-                        {options.flavor.find(f => f.id === selectedOptions.flavor)?.name}
-                      </span>
-                      <span className="font-semibold">
-                        +€{options.flavor.find(f => f.id === selectedOptions.flavor)?.price}
-                      </span>
-                    </div>
-                  )}
-                  
-                  {selectedOptions.filling && options.filling.find(f => f.id === selectedOptions.filling)?.price > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">
-                        {options.filling.find(f => f.id === selectedOptions.filling)?.name}
-                      </span>
-                      <span className="font-semibold">
-                        +€{options.filling.find(f => f.id === selectedOptions.filling)?.price}
-                      </span>
-                    </div>
-                  )}
-                  
-                  {selectedOptions.frosting && options.frosting.find(f => f.id === selectedOptions.frosting)?.price !== 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">
-                        {options.frosting.find(f => f.id === selectedOptions.frosting)?.name}
-                      </span>
-                      <span className="font-semibold">
-                        {options.frosting.find(f => f.id === selectedOptions.frosting)?.price > 0 ? '+' : ''}€{options.frosting.find(f => f.id === selectedOptions.frosting)?.price}
-                      </span>
-                    </div>
-                  )}
-                  
-                  {selectedOptions.decoration && options.decoration.find(d => d.id === selectedOptions.decoration)?.price > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">
-                        {options.decoration.find(d => d.id === selectedOptions.decoration)?.name}
-                      </span>
-                      <span className="font-semibold">
-                        +€{options.decoration.find(d => d.id === selectedOptions.decoration)?.price}
-                      </span>
-                    </div>
-                  )}
-                  
-                  {(selectedOptions.designAccessories || []).map(accessoryId => {
-                    const accessory = options.designAccessories?.find(a => a.id === accessoryId);
-                    return (
+                  {selectedOptions.designAccessories.map(accessoryId => {
+                    const accessory = options.designAccessories.find(a => a.id === accessoryId);
+                    return accessory ? (
                       <div key={accessoryId} className="flex justify-between">
-                        <span className="text-gray-600">{accessory?.name}</span>
-                        <span className="font-semibold">+€{accessory?.price}</span>
+                        <span className="text-gray-600 text-sm">{accessory.name}</span>
+                        <span className="font-semibold">+€{accessory.price}</span>
                       </div>
-                    );
+                    ) : null;
                   })}
+                  
+                  {selectedOptions.cupcakes && selectedOptions.cupcakes !== 'none' && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">
+                        {options.cupcakes.find(c => c.id === selectedOptions.cupcakes)?.name}
+                      </span>
+                      <span className="font-semibold">
+                        +€{options.cupcakes.find(c => c.id === selectedOptions.cupcakes)?.price || 0}
+                      </span>
+                    </div>
+                  )}
+                  
+                  {selectedOptions.deliveryOption && selectedOptions.deliveryOption !== 'pickup' && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">
+                        {options.deliveryOption.find(d => d.id === selectedOptions.deliveryOption)?.name}
+                      </span>
+                      <span className="font-semibold">
+                        +€{options.deliveryOption.find(d => d.id === selectedOptions.deliveryOption)?.price || 0}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 
                 <Separator />
@@ -498,7 +474,7 @@ const CakeBuilder = () => {
                   
                   {!isComplete() && (
                     <p className="text-sm text-gray-500 text-center">
-                      Please complete all selections to continue
+                      Please complete all required selections
                     </p>
                   )}
                 </div>
@@ -511,4 +487,4 @@ const CakeBuilder = () => {
   );
 };
 
-export default CakeBuilder;
+export default CakeBuilderFixed;
