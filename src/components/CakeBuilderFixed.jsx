@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
-import { ChefHat, Cake, Palette, Star, Plus, Minus, ShoppingCart } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { ChefHat, Cake, Palette, Star, Plus, Minus, ShoppingCart, Upload, Calendar } from 'lucide-react';
+import { useCart } from '@/contexts/CartContext';
+import { toast } from 'sonner';
 
 const CakeBuilderFixed = () => {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [selectedOptions, setSelectedOptions] = useState({
     size: null,
     cakeType: null,
@@ -16,7 +23,9 @@ const CakeBuilderFixed = () => {
     designAccessories: [],
     description: '',
     cupcakes: 'none',
-    deliveryOption: null
+    deliveryOption: null,
+    uploadedImage: null,
+    deliveryDate: ''
   });
 
   const basePrice = 160;
@@ -106,10 +115,56 @@ const CakeBuilderFixed = () => {
     }));
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedOptions(prev => ({
+          ...prev,
+          uploadedImage: {
+            file: file,
+            preview: e.target.result,
+            name: file.name
+          }
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const isComplete = () => {
     return selectedOptions.size && selectedOptions.cakeType && 
            selectedOptions.flavor && selectedOptions.filling && 
-           selectedOptions.deliveryOption;
+           selectedOptions.deliveryOption && selectedOptions.deliveryDate;
+  };
+
+  const handleAddToCart = () => {
+    if (!isComplete()) return;
+    
+    const cakeItem = {
+      id: `cake-${Date.now()}`,
+      cake_name: 'Custom Cake',
+      price: calculateTotal(),
+      image_url: selectedOptions.uploadedImage?.preview || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80',
+      customization: {
+        size: selectedOptions.size,
+        cakeType: selectedOptions.cakeType,
+        finishColor: selectedOptions.finishColor,
+        flavor: selectedOptions.flavor,
+        filling: selectedOptions.filling,
+        designAccessories: selectedOptions.designAccessories,
+        description: selectedOptions.description,
+        cupcakes: selectedOptions.cupcakes,
+        deliveryOption: selectedOptions.deliveryOption,
+        deliveryDate: selectedOptions.deliveryDate,
+        uploadedImage: selectedOptions.uploadedImage
+      }
+    };
+    
+    addToCart(cakeItem);
+    toast.success('Cake added to cart!');
+    navigate('/cart');
   };
 
   return (
@@ -340,6 +395,59 @@ const CakeBuilderFixed = () => {
               </CardContent>
             </Card>
 
+            {/* Image Upload */}
+            <Card className="border-pink-200">
+              <CardHeader>
+                <CardTitle className="text-black">Reference Image (Optional)</CardTitle>
+                <p className="text-sm text-gray-600">
+                  Upload an image to help us understand your vision better
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-center w-full">
+                    <label htmlFor="image-upload" className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <Upload className="w-8 h-8 mb-4 text-gray-500" />
+                        <p className="mb-2 text-sm text-gray-500">
+                          <span className="font-semibold">Click to upload</span> or drag and drop
+                        </p>
+                        <p className="text-xs text-gray-500">PNG, JPG or JPEG (MAX. 5MB)</p>
+                      </div>
+                      <input 
+                        id="image-upload" 
+                        type="file" 
+                        className="hidden" 
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                      />
+                    </label>
+                  </div>
+                  {selectedOptions.uploadedImage && (
+                    <div className="flex items-center gap-4 p-4 bg-pink-50 rounded-lg">
+                      <img 
+                        src={selectedOptions.uploadedImage.preview} 
+                        alt="Preview" 
+                        className="w-16 h-16 object-cover rounded-lg"
+                      />
+                      <div className="flex-1">
+                        <p className="font-medium text-black">{selectedOptions.uploadedImage.name}</p>
+                        <p className="text-sm text-gray-600">Image uploaded successfully</p>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setSelectedOptions(prev => ({ ...prev, uploadedImage: null }))}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Matching Cupcakes */}
             <Card className="border-pink-200">
               <CardHeader>
@@ -394,6 +502,52 @@ const CakeBuilderFixed = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Delivery Date */}
+            <Card className="border-pink-200">
+              <CardHeader>
+                <CardTitle className="text-black">
+                  {selectedOptions.deliveryOption === 'pickup' ? 'Pickup Date' : 'Delivery Date'}
+                </CardTitle>
+                <p className="text-sm text-gray-600">
+                  Please allow at least 3 days for custom cake preparation
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="delivery-date">Select Date</Label>
+                    <Input
+                      id="delivery-date"
+                      type="date"
+                      value={selectedOptions.deliveryDate}
+                      onChange={(e) => setSelectedOptions(prev => ({ ...prev, deliveryDate: e.target.value }))}
+                      min={new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
+                      className="w-full"
+                    />
+                  </div>
+                  {selectedOptions.deliveryOption === 'pickup' && (
+                    <div className="p-4 bg-blue-50 rounded-lg">
+                      <h4 className="font-semibold text-blue-800 mb-2">Pickup Address</h4>
+                      <p className="text-blue-700 text-sm">
+                        123 Cake Street, Dublin 2, Ireland<br />
+                        Available: Mon-Fri 9AM-6PM, Sat 10AM-4PM
+                      </p>
+                    </div>
+                  )}
+                  {selectedOptions.deliveryOption === 'delivery' && (
+                    <div className="p-4 bg-green-50 rounded-lg">
+                      <h4 className="font-semibold text-green-800 mb-2">Delivery Information</h4>
+                      <p className="text-green-700 text-sm">
+                        Delivery available within Dublin City only<br />
+                        Delivery fee: €28.00<br />
+                        Delivery time: 10AM-6PM
+                      </p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -467,6 +621,7 @@ const CakeBuilderFixed = () => {
                   <Button 
                     className="w-full bg-pink-500 hover:bg-pink-600 text-white"
                     disabled={!isComplete()}
+                    onClick={handleAddToCart}
                   >
                     <ShoppingCart className="w-4 h-4 mr-2" />
                     Add to Cart

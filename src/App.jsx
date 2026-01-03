@@ -7,7 +7,10 @@ import NavigationTracker from '@/lib/NavigationTracker'
 import { pagesConfig } from './pages.config'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
-import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import { AuthProvider as OldAuthProvider, useAuth as useOldAuth } from '@/lib/AuthContext';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { CartProvider } from '@/contexts/CartContext';
+import { OrdersProvider } from '@/contexts/OrdersContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import CookieConsent from '@/components/CookieConsent';
 
@@ -70,17 +73,23 @@ const AuthenticatedApp = () => {
 function App() {
 
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router>
-          <NavigationTracker />
-          <AuthenticatedApp />
-        </Router>
-        <Toaster />
+    <OldAuthProvider>
+      <AuthProvider>
+        <CartProvider>
+          <OrdersProvider>
+            <QueryClientProvider client={queryClientInstance}>
+              <Router>
+                <NavigationTracker />
+                <AuthenticatedApp />
+              </Router>
+              <Toaster />
         <VisualEditAgent />
         <CookieConsent />
-      </QueryClientProvider>
-    </AuthProvider>
+        </QueryClientProvider>
+          </OrdersProvider>
+        </CartProvider>
+      </AuthProvider>
+    </OldAuthProvider>
   )
 }
 

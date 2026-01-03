@@ -44,6 +44,23 @@ Successfully deployed the "Cake'd by Adorable" React website to AWS using S3, Cl
 
 ### 3. Technical Issues Resolved
 
+#### Cake Builder Component Crashes (January 3, 2026)
+- **Problem**: CakeBuilder.jsx crashed with JavaScript map errors and undefined property issues
+- **Root Cause**: 
+  - `.map()` calls on potentially undefined arrays
+  - Missing optional chaining for nested properties
+  - Incomplete Design Accessories section
+- **Solution**: 
+  - Created `CakeBuilderFixed.jsx` with complete rewrite
+  - Removed all `.map()` calls on undefined arrays
+  - Added missing Design Accessories section with proper pricing
+  - Simplified state management for better reliability
+  - Updated `CakeShop.jsx` to use fixed component
+- **Files Modified**:
+  - `src/components/CakeBuilderFixed.jsx` (new)
+  - `src/pages/CakeShop.jsx` (updated import)
+- **Deployment**: Built and deployed with CloudFront cache invalidation
+
 #### Base44 SDK WebSocket Compatibility
 - **Problem**: Base44 SDK attempted WebSocket connections to static S3 bucket
 - **Solution**: 
@@ -132,6 +149,29 @@ dist/
 - **Compression**: Enabled for faster loading
 - **Error Handling**: SPA routing supported with 404 → index.html
 
+### 11. Recent Updates (January 3, 2026)
+
+#### Cake Builder Fix Deployment
+```bash
+# Created fixed component
+# /home/aderonke_joy/cakedbyadorable/src/components/CakeBuilderFixed.jsx
+
+# Updated CakeShop page to use fixed component
+# /home/aderonke_joy/cakedbyadorable/src/pages/CakeShop.jsx
+
+# Build and deploy
+cd "/home/aderonke_joy/cakedbyadorable" && npm run build
+cd "/home/aderonke_joy/cakedbyadorable" && aws s3 sync dist/ s3://cakedbyadorable-website-2026/ --delete --region eu-west-1
+
+# Invalidate CloudFront cache
+aws cloudfront create-invalidation --distribution-id EX11Q32E9TQ7S --invalidation-batch CallerReference=cake-builder-fix-2025-01-27-1,Paths={Items=["/*"],Quantity=1}
+
+# Git operations
+git add .
+git commit -m "Fix: Complete cake builder rewrite to resolve crashes"
+# Note: GitHub push pending due to repository access issues
+```
+
 ## Status: ✅ DEPLOYMENT SUCCESSFUL
 All URLs are working and the website is live. Ready for production use at `https://cakedbyadorable.intellinexsystems.ie`.
 
@@ -139,5 +179,6 @@ All URLs are working and the website is live. Ready for production use at `https
 
 ---
 *Deployment completed: January 2, 2026*
-*Last updated: Files synced, cache invalidated, and pushed to GitHub*
+*Last updated: January 3, 2026 - Cake builder fixes deployed*
 *GitHub Repository: https://github.com/aderonke-gif/cakedbyadorable*
+*Note: Latest fixes committed locally, GitHub push pending repository access resolution*

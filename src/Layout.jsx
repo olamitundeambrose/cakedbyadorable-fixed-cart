@@ -4,11 +4,13 @@ import { createPageUrl } from '@/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
-import { Menu, X, ShoppingCart } from 'lucide-react';
+import { Menu, X, ShoppingCart, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Footer from '@/components/home/Footer';
 import LoadingScreen from '@/components/LoadingScreen';
+import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
 import logoImage from '@/assets/logo.png';
 
 const navLinks = [
@@ -25,14 +27,10 @@ export default function Layout({ children, currentPageName }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
+  const { getCartItemsCount } = useCart();
+  const { user, isAuthenticated, logout } = useAuth();
 
-  const { data: cartItems = [] } = useQuery({
-    queryKey: ['cartItems'],
-    queryFn: () => base44.entities.CartItem.list(),
-    initialData: [],
-  });
-
-  const cartCount = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  const cartCount = getCartItemsCount();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -117,6 +115,46 @@ export default function Layout({ children, currentPageName }) {
                     </span>
                   </Button>
                 </Link>
+
+                {/* User Menu */}
+                {isAuthenticated ? (
+                  <div className="hidden md:flex items-center gap-2">
+                    <Link
+                      to={createPageUrl('Dashboard')}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-full transition-colors ${
+                        scrolled || !isHome 
+                          ? 'text-stone-700 hover:bg-stone-100' 
+                          : 'text-stone-700 hover:bg-white/20'
+                      }`}
+                    >
+                      <User className="w-4 h-4" />
+                      <span className="text-sm font-medium">{user?.firstName}</span>
+                    </Link>
+                    <button
+                      onClick={logout}
+                      className={`p-2 rounded-full transition-colors ${
+                        scrolled || !isHome 
+                          ? 'text-stone-700 hover:bg-stone-100' 
+                          : 'text-stone-700 hover:bg-white/20'
+                      }`}
+                      title="Sign Out"
+                    >
+                      <LogOut className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    to={createPageUrl('Auth')}
+                    className={`hidden md:block px-4 py-2 rounded-full transition-colors ${
+                      scrolled || !isHome 
+                        ? 'bg-stone-800 text-white hover:bg-stone-900' 
+                        : 'bg-white text-stone-800 hover:bg-stone-100'
+                    }`}
+                  >
+                    Sign In
+                  </Link>
+                )}
+
                 <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
                   <SheetTrigger asChild>
                     <Button variant="ghost" size="icon">

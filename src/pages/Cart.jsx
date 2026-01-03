@@ -1,34 +1,15 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { toast } from 'sonner';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, ArrowLeft } from 'lucide-react';
+import { useCart } from '@/contexts/CartContext';
 
 export default function Cart() {
-  const queryClient = useQueryClient();
-
-  const { data: cartItems = [], isLoading } = useQuery({
-    queryKey: ['cartItems'],
-    queryFn: () => base44.entities.CartItem.list(),
-    initialData: [],
-  });
-
-  const updateQuantityMutation = useMutation({
-    mutationFn: ({ id, quantity }) => base44.entities.CartItem.update(id, { quantity }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cartItems'] }),
-  });
-
-  const removeItemMutation = useMutation({
-    mutationFn: (id) => base44.entities.CartItem.delete(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cartItems'] });
-      toast.success('Item removed from cart');
-    },
-  });
+  const navigate = useNavigate();
+  const { cartItems, updateQuantity, removeFromCart } = useCart();
 
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const deliveryFee = subtotal > 100 ? 0 : 15;
@@ -97,7 +78,7 @@ export default function Cart() {
                               size="icon"
                               onClick={() => {
                                 if (item.quantity > 1) {
-                                  updateQuantityMutation.mutate({ id: item.id, quantity: item.quantity - 1 });
+                                  updateQuantity(item.id, item.quantity - 1);
                                 }
                               }}
                               disabled={item.quantity <= 1}
@@ -109,7 +90,7 @@ export default function Cart() {
                             <Button
                               variant="ghost"
                               size="icon"
-                              onClick={() => updateQuantityMutation.mutate({ id: item.id, quantity: item.quantity + 1 })}
+                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
                               className="w-8 h-8 rounded-full"
                             >
                               <Plus className="w-4 h-4" />
@@ -119,7 +100,10 @@ export default function Cart() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => removeItemMutation.mutate(item.id)}
+                            onClick={() => {
+                              removeFromCart(item.id);
+                              toast.success('Item removed from cart');
+                            }}
                             className="text-stone-400 hover:text-red-500"
                           >
                             <Trash2 className="w-5 h-5" />
@@ -181,7 +165,10 @@ export default function Cart() {
                     </div>
                   </div>
 
-                  <Button className="w-full bg-stone-800 hover:bg-stone-900 text-white rounded-full py-6">
+                  <Button 
+                    className="w-full bg-stone-800 hover:bg-stone-900 text-white rounded-full py-6"
+                    onClick={() => navigate('/payment')}
+                  >
                     Proceed to Checkout
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
