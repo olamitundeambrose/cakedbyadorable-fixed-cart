@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
 import { ShoppingCart, Plus, Filter, X } from 'lucide-react';
 import CakeBuilderFixed from '@/components/CakeBuilderFixed';
+import { useCart } from '@/contexts/CartContext';
 
 const categories = [
   { id: 'all', label: 'All Cakes' },
@@ -89,7 +88,8 @@ const demoCakes = [
 export default function CakeShop() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
-  const queryClient = useQueryClient();
+  const [isLoading, setIsLoading] = useState(false);
+  const { addToCart } = useCart();
 
   // Get category from URL params
   useEffect(() => {
@@ -100,25 +100,12 @@ export default function CakeShop() {
     }
   }, []);
 
-  const { data: cakes = [], isLoading } = useQuery({
-    queryKey: ['cakes'],
-    queryFn: () => Promise.resolve(demoCakes), // Use demo data instead of API
-    initialData: demoCakes,
-  });
+  const cakes = demoCakes;
 
-  const addToCartMutation = useMutation({
-    mutationFn: (cake) => base44.entities.CartItem.create({
-      cake_id: cake.id,
-      cake_name: cake.name,
-      quantity: 1,
-      price: cake.price,
-      image_url: cake.image_url,
-    }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['cartItems'] });
-      toast.success('Added to cart!');
-    },
-  });
+  const handleAddToCart = (cake) => {
+    addToCart(cake);
+    toast.success('Added to cart!');
+  };
 
   const filteredCakes = selectedCategory === 'all' 
     ? cakes 
@@ -266,8 +253,7 @@ export default function CakeShop() {
                           className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300"
                         >
                           <Button
-                            onClick={() => addToCartMutation.mutate(cake)}
-                            disabled={addToCartMutation.isPending}
+                            onClick={() => handleAddToCart(cake)}
                             className="w-full bg-white hover:bg-stone-100 text-stone-800 rounded-full shadow-lg"
                           >
                             <ShoppingCart className="w-4 h-4 mr-2" />
@@ -294,7 +280,7 @@ export default function CakeShop() {
                           <Button
                             size="icon"
                             variant="ghost"
-                            onClick={() => addToCartMutation.mutate(cake)}
+                            onClick={() => handleAddToCart(cake)}
                             className="md:hidden w-10 h-10 rounded-full bg-stone-100 hover:bg-stone-200"
                           >
                             <Plus className="w-5 h-5" />
