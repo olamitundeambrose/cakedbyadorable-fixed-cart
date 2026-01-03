@@ -151,17 +151,21 @@ const CakeBuilderFixed = () => {
     return complete;
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.preventDefault(); // Prevents default behavior
+    e.stopPropagation(); // Stops event bubbling
+    
     console.log('🎂 Add to Cart clicked!');
     if (!isComplete()) {
       console.log('🎂 Form not complete, cannot add to cart');
+      toast.error('Please complete all required selections');
       return;
     }
     
     console.log('🎂 Adding to cart...');
     const cakeItem = {
       id: `cake-${Date.now()}`,
-      cake_name: 'Custom Cake',
+      name: 'Custom Cake',
       price: calculateTotal(),
       image_url: selectedOptions.uploadedImage?.preview || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80',
       customization: {
@@ -181,8 +185,7 @@ const CakeBuilderFixed = () => {
     
     console.log('🎂 Cake item:', cakeItem);
     addToCart(cakeItem);
-    toast.success('Cake added to cart!');
-    navigate('/cart');
+    toast.success('Custom cake added to cart!');
   };
 
   return (
@@ -639,7 +642,7 @@ const CakeBuilderFixed = () => {
                   <Button 
                     className="w-full bg-pink-500 hover:bg-pink-600 text-white"
                     disabled={!isComplete()}
-                    onClick={handleAddToCart}
+                    onClick={(e) => handleAddToCart(e)}
                   >
                     <ShoppingCart className="w-4 h-4 mr-2" />
                     Add to Cart

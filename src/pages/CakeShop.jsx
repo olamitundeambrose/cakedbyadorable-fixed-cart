@@ -102,7 +102,10 @@ export default function CakeShop() {
 
   const cakes = demoCakes;
 
-  const handleAddToCart = (cake) => {
+  const handleAddToCart = (e, cake) => {
+    e.preventDefault(); // Prevents default link behavior
+    e.stopPropagation(); // Stops the Card's onClick from firing
+    
     try {
       console.log('Adding cake to cart:', cake);
       addToCart(cake);
@@ -260,7 +263,7 @@ export default function CakeShop() {
                           className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300"
                         >
                           <Button
-                            onClick={() => handleAddToCart(cake)}
+                            onClick={(e) => handleAddToCart(e, cake)}
                             className="w-full bg-white hover:bg-stone-100 text-stone-800 rounded-full shadow-lg"
                           >
                             <ShoppingCart className="w-4 h-4 mr-2" />
@@ -287,7 +290,7 @@ export default function CakeShop() {
                           <Button
                             size="icon"
                             variant="ghost"
-                            onClick={() => handleAddToCart(cake)}
+                            onClick={(e) => handleAddToCart(e, cake)}
                             className="md:hidden w-10 h-10 rounded-full bg-stone-100 hover:bg-stone-200"
                           >
                             <Plus className="w-5 h-5" />
