@@ -134,14 +134,31 @@ const CakeBuilderFixed = () => {
   };
 
   const isComplete = () => {
-    return selectedOptions.size && selectedOptions.cakeType && 
+    const complete = selectedOptions.size && selectedOptions.cakeType && 
            selectedOptions.flavor && selectedOptions.filling && 
            selectedOptions.deliveryOption && selectedOptions.deliveryDate;
+    
+    console.log('🎂 isComplete check:', {
+      size: selectedOptions.size,
+      cakeType: selectedOptions.cakeType,
+      flavor: selectedOptions.flavor,
+      filling: selectedOptions.filling,
+      deliveryOption: selectedOptions.deliveryOption,
+      deliveryDate: selectedOptions.deliveryDate,
+      complete
+    });
+    
+    return complete;
   };
 
   const handleAddToCart = () => {
-    if (!isComplete()) return;
+    console.log('🎂 Add to Cart clicked!');
+    if (!isComplete()) {
+      console.log('🎂 Form not complete, cannot add to cart');
+      return;
+    }
     
+    console.log('🎂 Adding to cart...');
     const cakeItem = {
       id: `cake-${Date.now()}`,
       cake_name: 'Custom Cake',
@@ -162,6 +179,7 @@ const CakeBuilderFixed = () => {
       }
     };
     
+    console.log('🎂 Cake item:', cakeItem);
     addToCart(cakeItem);
     toast.success('Cake added to cart!');
     navigate('/cart');
