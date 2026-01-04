@@ -7,12 +7,12 @@ import { ChevronRight, Sparkles } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-pink-50 via-white to-pink-100 pt-20 sm:pt-24">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 sm:pt-24" style={{background: 'linear-gradient(135deg, #eedadf 0%, #f5eaed 50%, #eedadf 100%)'}}>
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-pink-100/40 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-pink-200/40 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-pink-100/20 to-pink-200/20 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full blur-3xl" style={{backgroundColor: '#eedadf80'}} />
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full blur-3xl" style={{backgroundColor: '#eedadf60'}} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-3xl" style={{background: 'radial-gradient(circle, #eedadf40 0%, #eedadf20 100%)'}} />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -75,8 +75,8 @@ export default function HeroSection() {
           >
             <div className="relative aspect-square max-w-lg mx-auto">
               {/* Decorative ring */}
-              <div className="absolute inset-0 border-2 border-rose-200/50 rounded-full animate-pulse" />
-              <div className="absolute inset-4 border border-amber-200/50 rounded-full" />
+              <div className="absolute inset-0 border-2 rounded-full animate-pulse" style={{borderColor: '#eedadf'}} />
+              <div className="absolute inset-4 border rounded-full" style={{borderColor: '#eedadfaa'}} />
               
               {/* Main image container */}
               <div className="absolute inset-8 rounded-full overflow-hidden shadow-2xl shadow-stone-300/50">
@@ -94,7 +94,7 @@ export default function HeroSection() {
                 className="absolute -top-4 right-8 bg-white rounded-2xl shadow-xl p-4"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{backgroundColor: '#eedadf'}}>
                     <span className="text-2xl">🎂</span>
                   </div>
                   <div>
@@ -110,7 +110,7 @@ export default function HeroSection() {
                 className="absolute -bottom-4 left-8 bg-white rounded-2xl shadow-xl p-4"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{backgroundColor: '#eedadfcc'}}>
                     <span className="text-2xl">⭐</span>
                   </div>
                   <div>

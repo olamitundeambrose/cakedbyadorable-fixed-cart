@@ -71,7 +71,7 @@ const steps = [
 
 export default function HowToOrderSection() {
   return (
-    <section className="py-24 sm:py-32 bg-stone-900 relative overflow-hidden">
+    <section className="py-24 sm:py-32 bg-black relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-500/5 rounded-full blur-3xl" />
